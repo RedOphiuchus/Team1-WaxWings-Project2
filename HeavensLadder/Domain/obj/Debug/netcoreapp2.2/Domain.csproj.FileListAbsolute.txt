@@ -1,0 +1,9 @@
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.deps.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.csprojAssemblyReference.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.csproj.CoreCompileInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.AssemblyInfoInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.AssemblyInfo.cs
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.pdb

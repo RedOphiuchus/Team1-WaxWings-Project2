@@ -11,7 +11,9 @@ namespace Data.Entities
         }
 
         public int Id { get; set; }
+        public int? GameModeId { get; set; }
 
+        public virtual GameModes GameMode { get; set; }
         public virtual ICollection<Sides> Sides { get; set; }
     }
 }

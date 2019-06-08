@@ -1,0 +1,14 @@
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Test.deps.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Test.runtimeconfig.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Test.runtimeconfig.dev.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Test.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Test.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.csprojAssemblyReference.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.csproj.CoreCompileInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.AssemblyInfoInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.AssemblyInfo.cs
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.pdb

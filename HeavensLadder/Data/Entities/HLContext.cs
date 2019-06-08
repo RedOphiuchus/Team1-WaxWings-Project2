@@ -44,6 +44,13 @@ namespace Data.Entities
             modelBuilder.Entity<Challenge>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.GameModeId).HasColumnName("gameModeId");
+
+                entity.HasOne(d => d.GameMode)
+                    .WithMany(p => p.Challenge)
+                    .HasForeignKey(d => d.GameModeId)
+                    .HasConstraintName("FK__Challenge__gameM__5FB337D6");
             });
 
             modelBuilder.Entity<DirectMessage>(entity =>
