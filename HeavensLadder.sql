@@ -11,11 +11,28 @@ create table [Challenge](
     id int PRIMARY KEY IDENTITY
 )
 
+
 create table [Team](
     id int PRIMARY KEY IDENTITY,
     teamname varchar(30) not null
 )
 go
+
+/* Akash's code*/
+
+create Table [UserTeam](
+    id int PRIMARY KEY IDENTITY,
+    teamid int not null FOREIGN KEY references [Team](id),
+    userid int not null FOREIGN KEY references [User](id),
+    leader bit not null,
+)
+
+create Table [DirectMessage](
+    id int PRIMARY KEY IDENTITY,
+    messagetime DateTime DEFAULT getDate(),
+    sendid int not null FOREIGN KEY REFERENCES [User](id),
+    recieveid int not null FOREIGN KEY references [User](id)
+)
 
 create table Sides(
     id int PRIMARY KEY IDENTITY,
