@@ -1,0 +1,11 @@
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.deps.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.csprojAssemblyReference.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.csproj.CoreCompileInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfoInputs.cache
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfo.cs
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.runtimeconfig.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.runtimeconfig.dev.json
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.pdb
