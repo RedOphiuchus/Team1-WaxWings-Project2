@@ -32,5 +32,25 @@ create table GameModes(
 )
 go
 
+CREATE TABLE [Rank](
+    id int PRIMARY KEY IDENTITY,
+    teamid int NOT NULL,
+    gamemodeid int NOT NULL FOREIGN KEY REFERENCES GameModes(id),
+    FOREIGN KEY (teamid) REFERENCES [Team](id),
+    rank int NOT NULL,
+    wins int NOT NULL,
+    losses int NOT NULL
+)
+
+go
+
+INSERT INTO GameModes(modename)
+VALUES ('Deathmatch'),
+		('VIP Deathmatch'),
+		('King of the Hill'),
+		('Crazy King'),
+		('Skyball');
+
+
 select * from GameModes
 select * from Sides
