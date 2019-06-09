@@ -1,0 +1,36 @@
+# ASP.NET Core
+
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfiguration: 'Release'
+  projectPath: 'HeavensLadder/API'
+  pathSolution: 'HeavensLadder'
+  pathToTest: 'HeavensLadder/Test'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+  workingDirectory: $(pathSolution)
+- script: dotnet test --configuration $(buildConfiguration) --no-build
+  workingDirectory: $(pathSolution)
+  displayName: 'dotnet PizzaBoxTest'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    projects: '$(projectPath)/*.csproj'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
+    appType: 'webApp'
+    WebAppName: 'PIzzaBoxWeb'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
