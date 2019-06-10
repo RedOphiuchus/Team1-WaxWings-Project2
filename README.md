@@ -1,5 +1,5 @@
 # Team1-WaxWings-Project2
-Project Proposal for Guns of Icarus Ladder:
+##Project Proposal for Guns of Icarus Ladder
 
 There's a problem with multiplayer games where the games don not come with adequate support for competitive play.
 Many multiplayer games lack a ladder system which ranks players, or teams, according to their skill. Players frequently create apps to facilitate these missing features.
