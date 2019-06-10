@@ -14,7 +14,7 @@ the ladder ranking of all teams for each of the game's various modes.
 * Angular
 * ASP.Net Web API
 * .Net C#
-* Entity Framewor
+* Entity Framework
 * SQL
 * Azure App Service
 * Azure DevOps Pipeline
