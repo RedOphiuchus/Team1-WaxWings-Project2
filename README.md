@@ -10,7 +10,7 @@ We will do this by allowing users to create accounts and join/create teams.  We 
 record the result of the match via the website.  Then, using business domain logic, the website will generate a page containing 
 the ladder ranking of all teams for each of the games various modes.
 
-Teachnologies:
+## Teachnologies
 * .Net C#
 * SQL
 * Entity Framework
