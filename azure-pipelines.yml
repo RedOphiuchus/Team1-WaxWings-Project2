@@ -22,15 +22,24 @@ steps:
   workingDirectory: $(pathSolution)
 - script: dotnet test --configuration $(buildConfiguration) --no-build
   workingDirectory: $(pathSolution)
-  displayName: 'dotnet PizzaBoxTest'
+  displayName: 'dotnet HeavensLadder'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     projects: '$(projectPath)/*.csproj'
-- task: AzureRmWebAppDeployment@4
+
+#- task: AzureRmWebAppDeployment@4
+#  inputs:
+#    ConnectionType: 'AzureRM'
+#    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
+#    appType: 'webApp'
+#    WebAppName: 'HeavensLadder'
+#    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+- task: AzureWebApp@1
   inputs:
-    ConnectionType: 'AzureRM'
     azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
     appType: 'webApp'
-    WebAppName: 'PIzzaBoxWeb'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    appName: 'HeavensLadder'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
