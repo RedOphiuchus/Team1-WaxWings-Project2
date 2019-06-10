@@ -9,3 +9,6 @@ D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcor
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.pdb
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.dll
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Domain.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Domain.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.csproj.CopyComplete

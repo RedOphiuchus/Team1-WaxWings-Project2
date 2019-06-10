@@ -12,3 +12,8 @@ D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcor
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.AssemblyInfo.cs
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.dll
 D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Data.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Domain.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Data.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Domain.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.csproj.CopyComplete

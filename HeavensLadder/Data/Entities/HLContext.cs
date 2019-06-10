@@ -32,7 +32,7 @@ namespace Data.Entities
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 using (StreamReader read = new StreamReader("../../../../PizzaBoxData/ConnectionString.txt"))
                 {
-                    optionsBuilder.UseSqlServer(read.ReadLine());
+                    optionsBuilder.UseSqlServer(read.ReadLine()/*"Server = sera-server.database.windows.net; Database = HeavensLadder; user id = redophiuchus; Password = Password1;"*/);
                 }
             }
         }
