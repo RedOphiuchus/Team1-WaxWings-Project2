@@ -11,10 +11,10 @@ record the result of the match via the website.  Then, using business domain log
 the ladder ranking of all teams for each of the games various modes.
 
 ## Teachnologies
+* Angular
+* ASP.Net Web API
 * .Net C#
-* SQL
 * Entity Framework
+* SQL
 * Azure App Service
 * Azure DevOps Pipeline
-* ASP.Net Web API
-* Angular
