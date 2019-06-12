@@ -1,5 +1,3 @@
-UserRepository
-
 using Data.Entities;
 using Domain;
 using System;
@@ -20,7 +18,7 @@ namespace Data
         //{
         //    return _db.User.Select(x => Mapper.Map(x));
         //}
-        public bool AddUser(User user)
+        public bool AddUser(Domain.User user)
         {
             bool check = false;
             //_db.User.Add(Mapper.Map(user));
