@@ -21,60 +21,58 @@ namespace Test
             test1.Userlist.Add(user1);
             test1.Roles.Add(true);
 
-            Team test2 = new Team();
-            test2.CreateTeam(user1);
+            Team test2 = new Team(user1);
 
             Assert.AreEqual(test1, test2);
         }
         
 
 
-            /*
+            
         //test for second parameterized constructor
         [TestMethod]
         public void TestDomTeam2()
         {
-
-            List<DomUser> userlist = new List<DomUser>();
+            string username = "testusername";
+            string password = "testpassword";
+            List<User> userlist = new List<User>();
             List<Boolean> roleslist = new List<Boolean>();
 
-            DomUser user1 = new DomUser();
-            user1.username = "testusername";
-            user1.password = "testpassword";
+            User user1 = new User(username,password);
+            
 
             userlist.Add(user1);
             roleslist.Add(true);
 
             Team test1 = new Team();
-            test1.UserList = userlist;
+            test1.Userlist = userlist;
             test1.Roles = roleslist;
-
-            Team test2 = DomTeam(userlist,roleslist);
+            Team test2 = new Team(userlist, roleslist);
             Assert.AreEqual(test1, test2);
         }
-        */
+        
 
-            /*
+            
         [TestMethod]
         public void AddMemberTest()
         {
+            string username = "testusername";
+            string password = "testpassword";
             //test for case where user does not exist in the team
             Team test1 = new Team();
             Team test2 = new Team();
-            DomUser testuser1 = new DomUser();
-            testuser1.username = "username1";
-            testuser1.password = "password1";
+            User testuser1 = new User(username,password);
 
             bool success = test1.AddMember(testuser1);
 
-            test2.UserList.Add(testuser1);
+            test2.Userlist.Add(testuser1);
             test2.Roles.Add(false);
 
             Assert.AreEqual(test1, test2);
 
             //test case for where user does exist in the team
             success = test1.AddMember(testuser1);
-            test2.UserList.Add(testuser1);
+            test2.Userlist.Add(testuser1);
             test2.Roles.Add(false);
 
             Assert.AreNotEqual(test1, test2);
@@ -86,11 +84,11 @@ namespace Test
         [TestMethod]
         public void RemoveMemberTest()
         {
+            string username = "testusername";
+            string password = "testpassword";
             Team test1 = new Team();
             Team test2 = new Team();
-            DomUser testuser1 = new DomUser();
-            testuser1.username = "username1";
-            testuser1.password = "password1";
+            User testuser1 = new User(username,password);
 
             bool success = test1.AddMember(testuser1);
             success = test1.RemoveMember(testuser1);
@@ -98,18 +96,17 @@ namespace Test
             Assert.AreEqual(test1, test2);
 
             //check for when removemember fails
-            DomUser testuser2 = new DomUser();
+            User testuser2 = new User("testusername2","testpassword2");
             success = test1.RemoveMember(testuser2);
             Assert.AreEqual(test1, test2);
         }
 
         public void SetLeaderTest()
         {
-            DomUser user1 = new DomUser();
-            DomUser user2 = new DomUser();
-            user2.username = "testing1";
-            DomUser user3 = new DomUser();
-            DomUser user4 = new DomUser();
+            User user1 = new User("username1","password1");
+            User user2 = new User("username2", "password2");
+            User user3 = new User("username3", "password3");
+            User user4 = new User("username4", "password4");
 
             Team team1 = new Team();
             team1.AddMember(user1);
@@ -124,20 +121,17 @@ namespace Test
 
             team1.setLeader(user2);
             Assert.AreEqual(true, team1.Roles[1]);
-
-
         }
 
 
         public void getLeaderTest()
         {
-            DomUser user1 = new DomUser();
-            DomUser user2 = new DomUser();
-            user2.username = "testing1";
-            DomUser user3 = new DomUser();
-            DomUser user4 = new DomUser();
+            User user1 = new User("username1", "password1");
+            User user2 = new User("username2", "password2");
+            User user3 = new User("username3", "password3");
+            User user4 = new User("username4", "password4");
 
-            DomUser teamleader = new DomUser();
+            User teamleader = new User(null,null);
 
             Team team1 = new Team();
             team1.AddMember(user1);
@@ -156,6 +150,6 @@ namespace Test
         }
 
 
-    */
+    
     }
 }

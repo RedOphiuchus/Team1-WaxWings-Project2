@@ -7004,23 +7004,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\seraa\\.nuget\\packages\\": {},
+    "C:\\Users\\Akash\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\Test.csproj",
+      "projectUniqueName": "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\Test.csproj",
       "projectName": "Test",
-      "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\Test.csproj",
-      "packagesPath": "C:\\Users\\seraa\\.nuget\\packages\\",
-      "outputPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\obj\\",
+      "projectPath": "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\Test.csproj",
+      "packagesPath": "C:\\Users\\Akash\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\seraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Akash\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7033,11 +7033,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {
-              "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj"
+            "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj"
             },
-            "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj"
+            "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Akash\\Desktop\\Project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj"
             }
           }
         }

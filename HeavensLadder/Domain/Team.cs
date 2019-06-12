@@ -12,24 +12,29 @@ namespace Domain
         public List<Boolean> Roles;
         public List<User> Userlist;
 
+
+
+        //zeroth parameterized constructor
+        public Team()
+        {
+
+        }
+
         //first parameterized constructor
 
-    public Team CreateTeam(User user1)
+    public Team(User user1)
     {
-        Team team = new Team();
-        team.Userlist.Add(user1);
-        team.Roles.Add(true); //set first user as team leader
-        return team;
+        
+        this.Userlist.Add(user1);
+        this.Roles.Add(true); //set first user as team leader
     }
 
 
 
-       public Team DataTeam(List<User> userlist, List<Boolean> roleslist)
+       public Team(List<User> userlist, List<Boolean> roleslist)
         {
-        Team team = new Team();
-        team.Userlist = userlist;
-        team.Roles = roleslist;
-        return team;
+            this.Userlist = userlist;
+            this.Roles = roleslist;
         }
    
 
