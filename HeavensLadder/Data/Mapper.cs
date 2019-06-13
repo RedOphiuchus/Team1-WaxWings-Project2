@@ -8,50 +8,30 @@ namespace Data
 {
     public static class Mapper
     {
-        //public static Data.Entities.User Map(Domain.User dmUser)
-        //{
-        //    Data.Entities.User deUser = new Entities.User();
-        //    deUser.id = dmUser.id;
-        //    deUser.username = dmUser.username;
-        //    deUser.password = dmUser.password;
+        public static Data.Entities.User Map(Domain.User dmUser)
+        {
+            Data.Entities.User deUser = new Entities.User();
+            //deUser.id = dmUser.id;
+            deUser.Username = dmUser.username;
+            deUser.Password = dmUser.password;
 
-        //    return deUser;
-        //}
-        //public static Domain.User Map(Data.Entities.User deUser) => new Domain.User
-        //{
-        //    id = deUser.id,
-        //    username = deUser.username,
-        //    password = deUser.password
-        //};
-        //public static Data.Entities.UserTeam Map(Domain.UserTeam dmUserTeam)
-        //{
-        //    Data.Entities.UserTeam deUserTeam = new Entities.UserTeam();
-        //    deUserTeam.id = dmUserTeam.id;
-        //    deUserTeam.teamid = dmUserTeam.teamid;
-        //    deUserTeam.userid = dmUserTeam.userid;
-        //    deUserTeam.leader = dmUserTeam.leader;
-
-        //    return deUserTeam;
-        //}
-        //public static Domain.UserTeam Map(Data.Entities.UserTeam deUserTeam) => new Domain.UserTeam
-        //{
-        //    id = deUserTeam.id,
-        //    teamid = deUserTeam.teamid,
-        //    userid = deUserTeam.userid,
-        //    leader = deUserTeam.leader
-        //};
+            return deUser;
+        }
+        public static Domain.User Map(Data.Entities.User deUser) => new Domain.User(deUser.Username, deUser.Password)
+        {
+        };
         ////Todo Complete
         //public static Data.Entities.Challenge Map(Domain.Challenge dmChallenge)
         //{
         //    Data.Entities.Challenge deChallenge = new Entities.Challenge();
-        //    deChallenge.id = dmChallenge.id;
+        //    deChallenge.Id = dmChallenge.id;
 
         //    return deChallenge;
         //}
         ////Todo Complete
         //public static Domain.Challenge Map(Data.Entities.Challenge deChallenge) => new Domain.Challenge
         //{
-        //    id = deChallenge.id,
+        //    id = deChallenge.Id,
         //};
 
         public static Data.Entities.Team Map(Domain.Team dmTeam)
