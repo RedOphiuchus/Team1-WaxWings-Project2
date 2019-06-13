@@ -6,11 +6,13 @@ namespace Domain
 {
     public interface IUserRepository
     {
-        bool AddUser(User user);
+        IEnumerable<Domain.User> GetUsers();
+        User GetUserByUserid(int userid);
+        bool AddUser(Domain.User user);
+        bool DeleteUser(Domain.User user);
         bool validatelogin(string username, string password);
         bool validateusername(string username);
-        //List<User> TeamUsers(Team team);
-        //IEnumerable<User> GetUsers();
-
+        List<Domain.User> TeamUsers(string teamname);
+        void Save();
     }
 }

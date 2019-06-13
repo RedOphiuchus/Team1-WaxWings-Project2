@@ -11,6 +11,7 @@ namespace Domain
         public string teamname;
         public List<Boolean> Roles;
         public List<User> Userlist;
+        public int rank;
 
 
 
@@ -20,6 +21,7 @@ namespace Domain
             Userlist = new List<User>();
             Roles = new List<bool>();
             teamname = "";
+            rank = int.MaxValue;
 
 
         }
@@ -33,6 +35,7 @@ namespace Domain
         Userlist.Add(user1);
         Roles.Add(true); //set first user as team leader
         teamname = "";
+        rank = int.MaxValue;
     }
 
 
@@ -42,6 +45,7 @@ namespace Domain
             this.Userlist = userlist;
             this.Roles = roleslist;
             this.teamname = "";
+            rank = int.MaxValue;
         }
    
 

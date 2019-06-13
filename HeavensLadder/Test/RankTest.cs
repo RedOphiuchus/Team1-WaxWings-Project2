@@ -7,7 +7,7 @@ using System.Text;
 namespace Test
 {
     [TestClass]
-    class RankTest
+    public class RankTest
     {
         [TestMethod]
         public void TestRankConstructor()
