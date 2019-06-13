@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,20 +8,20 @@ namespace Data
 {
     public static class Mapper
     {
-        public static Data.Entities.User Map(Domain.User dmUser)
-        {
-            Data.Entities.User deUser = new Entities.User();
-            //deUser.id = dmUser.id;
-            deUser.Username = dmUser.username;
-            deUser.Password = dmUser.password;
+        //public static Data.Entities.User Map(Domain.User dmUser)
+        //{
+        //    Data.Entities.User deUser = new Entities.User();
+        //    deUser.id = dmUser.id;
+        //    deUser.username = dmUser.username;
+        //    deUser.password = dmUser.password;
 
-            return deUser;
-        }
+        //    return deUser;
+        //}
         //public static Domain.User Map(Data.Entities.User deUser) => new Domain.User
         //{
-        //    //id = deUser.id,
-        //    username = deUser.Username,
-        //    password = deUser.Password
+        //    id = deUser.id,
+        //    username = deUser.username,
+        //    password = deUser.password
         //};
         //public static Data.Entities.UserTeam Map(Domain.UserTeam dmUserTeam)
         //{

@@ -1,3 +1,5 @@
+
+
 using Data.Entities;
 using Domain;
 using System;
@@ -18,12 +20,12 @@ namespace Data
         //{
         //    return _db.User.Select(x => Mapper.Map(x));
         //}
-        public bool AddUser(Domain.User user)
+      /*  public bool AddUser(User user)
         {
             bool check = false;
             //_db.User.Add(Mapper.Map(user));
             return check;
-        }
+        }*/
         public bool validatelogin(string username, string password)
         {
             bool validate = false;
