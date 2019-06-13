@@ -29,7 +29,7 @@ namespace Test
                 UsernamesEqual = true;
             }
 
-            Assert.AreEqual(UsernamesEqual,UsernamesEqual);
+            Assert.AreEqual(UsernamesEqual,true);
         }
         
 
@@ -39,6 +39,7 @@ namespace Test
         [TestMethod]
         public void TestDomTeam2()
         {
+            
             string username = "testusername";
             string password = "testpassword";
             List<User> userlist = new List<User>();
@@ -54,7 +55,9 @@ namespace Test
             test1.Userlist = userlist;
             test1.Roles = roleslist;
             Team test2 = new Team(userlist, roleslist);
-            Assert.AreEqual(test1, test2);
+
+          
+            Assert.AreEqual(test1.Roles[0], test2.Roles[0]);
         }
         
 
@@ -62,6 +65,7 @@ namespace Test
         [TestMethod]
         public void AddMemberTest()
         {
+            bool UsernamesEqual = false;
             string username = "testusername";
             string password = "testpassword";
             //test for case where user does not exist in the team
@@ -73,19 +77,24 @@ namespace Test
 
             test2.Userlist.Add(testuser1);
             test2.Roles.Add(false);
+            if(test1.Userlist[0].username.Equals(test2.Userlist[0].username))
+            {
+                UsernamesEqual = true;
+            }
 
-            Assert.AreEqual(test1, test2);
+            Assert.AreEqual(UsernamesEqual, true);
 
             //test case for where user does exist in the team
             success = test1.AddMember(testuser1);
             test2.Userlist.Add(testuser1);
             test2.Roles.Add(false);
 
-            Assert.AreNotEqual(test1, test2);
+            Assert.AreNotEqual(test1.Userlist.Count, test2.Userlist.Count);
 
 
         }
         
+
 
         [TestMethod]
         public void RemoveMemberTest()
@@ -95,16 +104,29 @@ namespace Test
             Team test1 = new Team();
             Team test2 = new Team();
             User testuser1 = new User(username,password);
+            User testuser2 = new User("testusername1", "testpassword1");
 
+            //check for when removemember passes
             bool success = test1.AddMember(testuser1);
+            success = test1.AddMember(testuser2);
             success = test1.RemoveMember(testuser1);
 
-            Assert.AreEqual(test1, test2);
+            success = test2.AddMember(testuser1);
+
+            Assert.AreEqual(test1.Userlist.Count, test2.Userlist.Count);
 
             //check for when removemember fails
-            User testuser2 = new User("testusername2","testpassword2");
-            success = test1.RemoveMember(testuser2);
-            Assert.AreEqual(test1, test2);
+            User testuser3 = new User("testusername2","testpassword2");
+            success = test1.RemoveMember(testuser3);
+            if (success == false)
+            {
+                Assert.AreEqual(test1.Userlist.Count, test2.Userlist.Count);
+            }
+            else
+            {
+                Assert.AreEqual(true, false);
+            }
+           
         }
 
         public void SetLeaderTest()
