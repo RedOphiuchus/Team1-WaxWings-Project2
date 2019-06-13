@@ -47,27 +47,28 @@ namespace Data
             teamname = deTeam.Teamname,
         };
 
-        //public static Data.Entities.Rank Map(Domain.Rank dmRank)
-        //{
-        //    Data.Entities.Rank deRank = new Entities.Rank();
-        //    deRank.id = dmRank.id;
-        //    deRank.teamid = dmRank.teamid;
-        //    deRank.gamemodeid = dmRank.gamemodeid;
-        //    deRank.rank = dmRank.rank;
-        //    deRank.wins = dmRank.wins;
-        //    deRank.losses = dmRank.losses;
+        public static Data.Entities.Rank Map(Domain.Rank dmRank)
+        {
+            Data.Entities.Rank deRank = new Entities.Rank();
+            deRank.id = dmRank.id;
+            deRank.teamid = dmRank.teamid;
+            deRank.gamemodeid = dmRank.gamemodeid;
+            deRank.rank = dmRank.rank;
+            deRank.wins = dmRank.wins;
+            deRank.losses = dmRank.losses;
 
-        //    return deRank;
-        //}
-        //public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank
-        //{
-        //    id = deRank.id,
-        //    teamid = deRank.teamid,
-        //    gamemodeid = deRank.gamemodeid,
-        //    rank = deRank.rank,
-        //    wins = deRank.wins,
-        //    losses = deRank.losses
-        //};
+            return deRank;
+        }
+        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank
+        {
+            id = deRank.id,
+            teamid = deRank.teamid,
+            gamemodeid = deRank.gamemodeid,
+            rank = deRank.rank,
+            wins = deRank.wins,
+            losses = deRank.losses
+        };
+        */
         //public static Data.Entities.DirectMessage Map(Domain.DirectMessage dmDirectMessage)
         //{
         //    Data.Entities.DirectMessage deDirectMessage = new Entities.DirectMessage();

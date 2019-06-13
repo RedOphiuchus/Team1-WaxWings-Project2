@@ -26,6 +26,19 @@ namespace Data
             throw new NotImplementedException();
         }
 
+        public bool AlreadyExists(Rank rank)
+        {
+            var name = rank.team.teamname;
+            var game = rank.gamemode;
+            var ranklist = _db.Rank;
+            foreach (var elem in ranklist)
+            {
+                if (elem.Team.Teamname == name && elem.Gamemode.Modename == game)
+                    return true;
+            }
+            return false;
+        }
+
         public List<Rank> GetAllRanks()
         {
             //return _db.Rank.Select(x => Mapper.Map(x));
@@ -63,6 +76,20 @@ namespace Data
         public bool UpdateRank(Rank rank)
         {
             throw new NotImplementedException();
+        }
+
+        public bool InitializeRanks(Team team)
+        {
+            Rank rank;
+            var gamemodes = _db.GameModes;        
+            foreach (var elem in gamemodes)
+            {
+                rank = new Rank(team, elem.Modename);
+                if (AlreadyExists(rank))
+                    return false;
+                AddRank(rank);
+            }
+            return true;
         }
     }
 }
