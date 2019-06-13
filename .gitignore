@@ -26,3 +26,5 @@ ConnectionString.txt
 *.dll
 *.dtbcache
 *.cache
+*.ide
+*.suo
