@@ -14,32 +14,43 @@ namespace Data
         {
             _db = db;
         }
-        //public IEnumerable<Domain.User> GetUsers()
-        //{
-        //    return _db.User.Select(x => Mapper.Map(x));
-        //}
-        /*  public bool AddUser(User user)
-          {
-              bool check = false;
-              //_db.User.Add(Mapper.Map(user));
-              return check;
-          }*/
+        public IEnumerable<Domain.User> GetUsers()
+        {
+            return _db.User.Select(x => Mapper.Map(x));
+        }
         public bool AddUser(Domain.User user)
         {
             bool check = false;
-            //_db.User.Add(Mapper.Map(user));
+            _db.User.Add(Mapper.Map(user));
             return check;
         }
         public bool validatelogin(string username, string password)
         {
             bool validate = false;
+            var element = _db.User.Where(a => a.Username == username).FirstOrDefault();
+            if (element.Password == password)
+            {
+                validate = true;
+            }
             return validate;
         }
         public bool validateusername(string username)
         {
             bool validateuser = false;
+            var element = _db.User.Where(a => a.Username == username).FirstOrDefault();
+            if (element != null)
+            {
+                validateuser = true;
+            }
             return validateuser;
         }
-        //List<User> TeamUsers(team team);
+        public List<Domain.User> TeamUsers(string teamname)
+        {
+            List<Domain.User> usersinteam = new List<Domain.User>();
+            var teamwanted = _db.Team.Where(a => a.Teamname == teamname).FirstOrDefault();
+            var teamwantedid = teamwanted.Id;
+
+            return usersinteam;
+        }
     }
 }
