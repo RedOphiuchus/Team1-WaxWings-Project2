@@ -11,14 +11,17 @@ namespace Data
         public static Data.Entities.User Map(Domain.User dmUser)
         {
             Data.Entities.User deUser = new Entities.User();
-            //deUser.id = dmUser.id;
+            deUser.Id = dmUser.id;
             deUser.Username = dmUser.username;
             deUser.Password = dmUser.password;
 
             return deUser;
         }
-        public static Domain.User Map(Data.Entities.User deUser) => new Domain.User(deUser.Username, deUser.Password)
+        public static Domain.User Map(Data.Entities.User deUser) => new Domain.User
         {
+            id = deUser.Id,
+            username = deUser.Username,
+            password = deUser.Password,
         };
         ////Todo Complete
         //public static Data.Entities.Challenge Map(Domain.Challenge dmChallenge)
