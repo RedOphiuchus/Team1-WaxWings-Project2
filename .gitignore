@@ -28,3 +28,5 @@ ConnectionString.txt
 *.cache
 *.ide
 *.suo
+*.json
+*.props
