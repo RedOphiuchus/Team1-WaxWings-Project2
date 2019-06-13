@@ -23,5 +23,6 @@ ConnectionString.txt
 *.pidb
 *.log
 *.scc
-
-*.Cache
+*.dll
+*.dtbcache
+*.cache
