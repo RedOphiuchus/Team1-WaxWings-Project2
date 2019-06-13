@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {}
+    "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {
+    "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj",
+        "projectUniqueName": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj",
         "projectName": "Data",
-        "projectPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj",
-        "packagesPath": "C:\\Users\\LDLS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\obj\\",
+        "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\Data.csproj",
+        "packagesPath": "C:\\Users\\seraa\\.nuget\\packages\\",
+        "outputPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\LDLS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\seraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj"
+              "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj"
               }
             }
           }
@@ -70,20 +70,20 @@
         }
       }
     },
-    "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
+    "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\LDLS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\obj\\",
+        "projectPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\seraa\\.nuget\\packages\\",
+        "outputPath": "D:\\Revature\\WaxWings\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\LDLS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\seraa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
