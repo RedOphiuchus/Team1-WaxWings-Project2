@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Revature\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {}
+    "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Revature\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
+    "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Revature\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Revature\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Carlos Zurita\\.nuget\\packages\\",
-        "outputPath": "C:\\Revature\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\LDLS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LDLS\\Revature\\project2\\Team1-WaxWings-Project2\\HeavensLadder\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Carlos Zurita\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LDLS\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
