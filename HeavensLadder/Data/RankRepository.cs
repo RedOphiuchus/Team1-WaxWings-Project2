@@ -18,7 +18,7 @@ namespace Data
             throw new NotImplementedException();
         }
 
-        public List<Rank> GetRank(Team team, string gamemode)
+        public List<Rank> GetRank(string teamname, string gamemode)
         {/*
             var list = GetRanksByTeam(team);
             var rank;
@@ -41,7 +41,7 @@ namespace Data
             throw new NotImplementedException();
         }
 
-        public List<Rank> GetRanksByTeam(Team team)
+        public List<Rank> GetRanksByTeam(string team)
         {
             throw new NotImplementedException();
         }
