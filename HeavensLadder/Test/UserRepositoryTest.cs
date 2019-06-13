@@ -32,10 +32,6 @@ namespace Test
             var Users = test.GetUsers();
             foreach (var User in Users)
             {
-                //if (User.username == username1)
-                //{
-                //    userid = User.id;
-                //}
                 actual = test.validateusername(User.username);
                 if (actual == false)
                 {
@@ -190,27 +186,33 @@ namespace Test
                 test.Save();
             }
         }
-        
-        //[TestMethod]
-        //public void teamuserstest()
-        //{
-        //    Data.Entities.HLContext _db = new Data.Entities.HLContext();
-        //    Data.UserRepository test = new Data.UserRepository(_db);
-            
-        //    string username = "Carlos";
-        //    string password = "something";
-        //    Domain.User user1 = new Domain.User();
-        //    user1.UserFill(username, password);
-        //    string username2 = "Akash";
-        //    string password2 = "other";
-        //    Domain.User user2 = new Domain.User();
-        //    user1.UserFill(username2, password2);
-        //    Domain.Team team1 = new Domain.Team(user1);
-        //    team1.teamname = "Team1";
-        //    team1.AddMember(user2);
-            
 
-        //}
+        [TestMethod]
+        public void teamuserstest()
+        {
+            Data.Entities.HLContext _db = new Data.Entities.HLContext();
+            Data.UserRepository test = new Data.UserRepository(_db);
+            Data.TeamRepository test2 = new Data.TeamRepository(_db);
+            string username = "Carlos";
+            string password = "something";
+            Domain.User user1 = new Domain.User();
+            user1.UserFill(username, password);
+            string username2 = "Akash";
+            string password2 = "other";
+            Domain.User user2 = new Domain.User();
+            user2.UserFill(username2, password2);
+
+            test.AddUser(user1);
+            test.AddUser(user2);
+            //test.Save();
+            Domain.Team team1 = new Domain.Team(user1);
+            team1.teamname = "Team1";
+            team1.AddMember(user2);
+            test2.AddTeam(team1);
+            //test.Save();
+            _db.SaveChanges();
+
+        }
 
         [TestMethod]
         public void savetest()
