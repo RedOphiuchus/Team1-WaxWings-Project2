@@ -54,19 +54,18 @@ namespace Data
         //    id = deChallenge.id,
         //};
 
-        //public static Data.Entities.Team Map(Domain.Team dmTeam)
-        //{
-        //    Data.Entities.Team deTeam = new Entities.Team();
-        //    deTeam.id = dmTeam.id;
-        //    deTeam.teamname = dmTeam.teamname;
-
-        //    return deTeam;
-        //}
-        //public static Domain.Team Map(Data.Entities.Team deTeam) => new Domain.Team
-        //{
-        //    id = deTeam.id,
-        //    teamname = deTeam.teamname
-        //};
+        public static Data.Entities.Team Map(Domain.Team dmTeam)
+        {
+            Data.Entities.Team deTeam = new Entities.Team();
+            //deTeam.id = dmTeam.id;
+            deTeam.Teamname = dmTeam.teamname;
+            return deTeam;
+        }
+        public static Domain.Team Map(Data.Entities.Team deTeam) => new Domain.Team
+        {
+           // id = deTeam.id,
+            teamname = deTeam.Teamname,
+        };
 
         //public static Data.Entities.Rank Map(Domain.Rank dmRank)
         //{
