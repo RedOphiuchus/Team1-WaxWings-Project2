@@ -16,3 +16,12 @@ C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Domain\obj
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.deps.json
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.dll
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.pdb
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.deps.json
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.dll
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\bin\Debug\netcoreapp2.2\Domain.pdb
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.csprojAssemblyReference.cache
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.csproj.CoreCompileInputs.cache
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.AssemblyInfoInputs.cache
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.AssemblyInfo.cs
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.dll
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Domain\obj\Debug\netcoreapp2.2\Domain.pdb
