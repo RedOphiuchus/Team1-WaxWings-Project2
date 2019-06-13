@@ -8,7 +8,7 @@ namespace Domain
     public class Team
     {
 
-        //public list<DomUser> Userlist; //commented out because this is not created yet
+        public string teamname;
         public List<Boolean> Roles;
         public List<User> Userlist;
 
@@ -17,6 +17,10 @@ namespace Domain
         //zeroth parameterized constructor
         public Team()
         {
+            Userlist = new List<User>();
+            Roles = new List<bool>();
+            teamname = "";
+
 
         }
 
@@ -24,9 +28,11 @@ namespace Domain
 
     public Team(User user1)
     {
-        
-        this.Userlist.Add(user1);
-        this.Roles.Add(true); //set first user as team leader
+        Userlist = new List<User>();
+        Roles = new List<bool>();
+        Userlist.Add(user1);
+        Roles.Add(true); //set first user as team leader
+        teamname = "";
     }
 
 
@@ -35,6 +41,7 @@ namespace Domain
         {
             this.Userlist = userlist;
             this.Roles = roleslist;
+            this.teamname = "";
         }
    
 

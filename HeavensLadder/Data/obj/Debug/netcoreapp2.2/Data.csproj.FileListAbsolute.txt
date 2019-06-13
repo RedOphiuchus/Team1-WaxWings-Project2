@@ -32,3 +32,11 @@ C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\D
 C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.csproj.CopyComplete
 C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.dll
 C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.pdb
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.deps.json
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.runtimeconfig.json
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.runtimeconfig.dev.json
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.dll
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Data.pdb
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Domain.dll
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\bin\Debug\netcoreapp2.2\Domain.pdb
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Data\obj\Debug\netcoreapp2.2\Data.csproj.CopyComplete
