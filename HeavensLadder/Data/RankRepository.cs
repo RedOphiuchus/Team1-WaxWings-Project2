@@ -12,6 +12,20 @@ namespace Data
         {
             _db = db;
         }
+
+        public bool AddRank(Rank rank)
+        {
+            /*_db.Rank.Add(Mapper.Map(rank));
+            _db.SaveChanges();
+            return true;*/
+            throw new NotImplementedException();
+        }
+
+        public bool DeleteRank(Rank rank)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Rank> GetAllRanks()
         {
             //return _db.Rank.Select(x => Mapper.Map(x));
@@ -42,6 +56,11 @@ namespace Data
         }
 
         public List<Rank> GetRanksByTeam(string team)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateRank(Rank rank)
         {
             throw new NotImplementedException();
         }
