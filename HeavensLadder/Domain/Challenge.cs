@@ -4,27 +4,27 @@ using System.Text;
 
 namespace Domain
 {
-    class Challenge
+    public class Challenge
     {
-        int id { get; set; }
+        public int id { get; set; }
 
-        Team Team1 { get; set; }
+        public Team Team1 { get; set; }
 
-        Team Team2 { get; set; }
-        bool? Team1Report { get; set; }
+        public Team Team2 { get; set; }
+        public bool? Team1Report { get; set; }
 
-        bool? Team2Report { get; set; }
+        public bool? Team2Report { get; set; }
 
-        string GameMode { get; set; }
+        public string GameMode { get; set; }
 
-        Challenge(Team team1, Team team2, string gameMode)
+        public Challenge(Team team1, Team team2, string gameMode)
         {
             Team1 = team1;
             Team2 = team2;
             GameMode = gameMode;
         }
 
-        Challenge(int id, Team team1, Team team2, string gameMode, bool? team1Report, bool? team2Report)
+        public Challenge(int id, Team team1, Team team2, string gameMode, bool? team1Report, bool? team2Report)
         {
             this.id = id;
             Team1 = team1;
@@ -34,7 +34,7 @@ namespace Domain
             Team2Report = team2Report;
         }
 
-        bool? Victor()
+        public bool? Victor()
         {
             if (Team1Report == null || Team2Report == null)
                 return null;
@@ -47,7 +47,7 @@ namespace Domain
             return null;
         }
 
-        bool MakeReport(Team team, bool result)
+        public bool MakeReport(Team team, bool result)
         {
             if(team == Team1)
             {
