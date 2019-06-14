@@ -55,6 +55,8 @@ namespace Data
             Data.Entities.Rank deRank = new Entities.Rank();
             deRank.Team = Map(dmRank.team);
             Data.Entities.GameModes deGame = new Entities.GameModes();
+            if (dmRank.id != null)
+                deRank.Id = (int)dmRank.id;
             deGame.Id = dmRank.gamemodeid;
             deRank.Gamemode = deGame;
             deRank.Rank1 = dmRank.ranking;

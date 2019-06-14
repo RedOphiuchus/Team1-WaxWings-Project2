@@ -46,6 +46,21 @@ namespace Test
         }
 
         [TestMethod]
+        public void TestAlreadyExists()
+        {
+            _db = new Data.Entities.HLContext();
+            test = new Data.RankRepository(_db);
+            Domain.Team team = new Domain.Team();
+            team.teamname = "testteam";
+            int gameid = 1;
+            Domain.Rank rank = new Domain.Rank(team, gameid);
+
+            bool exists = test.AlreadyExists(rank);
+                        
+            Assert.AreEqual(exists, false);
+        }
+        /*
+        [TestMethod]
         public void TestInitializeRanks()
         {
             _db = new Data.Entities.HLContext();
@@ -57,6 +72,6 @@ namespace Test
             Assert.AreEqual(initialized, true);
             bool repeateinit = test.InitializeRanks(team);
             Assert.AreEqual(repeateinit, false);
-        }
+        }*/
     }
 }

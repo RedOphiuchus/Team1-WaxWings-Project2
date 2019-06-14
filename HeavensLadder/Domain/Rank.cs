@@ -4,7 +4,7 @@ namespace Domain
 {
     public class Rank
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public int ranking { get; set; }
         public int wins { get; set; }
         public int losses { get; set; }

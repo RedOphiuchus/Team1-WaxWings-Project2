@@ -33,13 +33,18 @@ namespace Data
 
         public bool AlreadyExists(Rank rank)
         {
-            var name = rank.team.teamname;
+            var team = rank.team;
             var game = rank.gamemodeid;
             var ranklist = _db.Rank;
+            if (ranklist == null)
+                return false;
             foreach (Data.Entities.Rank elem in ranklist)
             {
-                if (elem.Team.Teamname == name && elem.Gamemode.Id == game)
-                    return true;
+                if (elem != null)
+                {
+                    if (elem.Team.Teamname == team.teamname && elem.Gamemode.Id == game)
+                        return true;
+                }
             }
             return false;
         }
