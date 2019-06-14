@@ -4,11 +4,12 @@ namespace Domain
 {
     public class Rank
     {
+        public int id { get; set; }
         public int ranking { get; set; }
         public int wins { get; set; }
         public int losses { get; set; }
         public Team team { get; set; }
-        public string gamemode { get; set; }
+        public int gamemodeid { get; set; }
 
         /// <summary>
         /// This will create a Rank class for a particular team and gamemode.
@@ -17,10 +18,10 @@ namespace Domain
         /// <param name="t"></param>
         /// <param name="game"></param>
         /// <returns></returns>
-        public Rank(Team t, string game)
+        public Rank(Team t, int game)
         {
             team = t;
-            gamemode = game;
+            gamemodeid = game;
             wins = 0;
             losses = 0;
             ranking = 0; 
