@@ -18,7 +18,8 @@ namespace Test
             string passwordcheck = "1234";
 
             //Act
-            User user1 = new User("Akash", "1234");
+            User user1 = new User();
+            user1.UserFill("Akash", "1234");
 
             //Assert
             Assert.AreEqual(usernamecheck, user1.username);
