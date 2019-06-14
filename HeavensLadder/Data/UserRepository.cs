@@ -36,7 +36,8 @@ namespace Data
         public bool DeleteUser(Domain.User user)
         {
             bool check = false;
-            _db.User.Remove(_db.User.Find(user.username));
+            //_db.User.Remove(_db.User.Find(user.username));
+            _db.User.Remove(_db.User.Where(a => a.Username == user.username).FirstOrDefault());
             return check;
         }
         public bool validatelogin(string username, string password)
