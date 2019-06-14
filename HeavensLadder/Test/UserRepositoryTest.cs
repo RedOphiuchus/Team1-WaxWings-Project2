@@ -201,7 +201,9 @@ namespace Test
             string password2 = "other";
             Domain.User user2 = new Domain.User();
             user2.UserFill(username2, password2);
-
+            bool actual1 = false;
+            bool actual2 = false;
+            bool expected = true;
             test.AddUser(user1);
             test.AddUser(user2);
             //test.Save();
@@ -211,6 +213,35 @@ namespace Test
             test2.AddTeam(team1);
             //test.Save();
             _db.SaveChanges();
+
+            //var usersinteamlist = test.TeamUsers(team1.teamname);
+            //foreach (var userinteamlist in usersinteamlist)
+            //{
+            //    if (userinteamlist.id == 1)
+            //    {
+            //        if (userinteamlist.username == username)
+            //        {
+            //            actual1 = true;
+            //        }
+            //    }
+            //    if (userinteamlist.id == 2)
+            //    {
+            //        if (userinteamlist.username == username2)
+            //        {
+            //            actual2 = true;
+            //        }
+            //    }
+            //}
+
+            //Assert.AreEqual(expected, actual1);
+            //Assert.AreEqual(expected, actual2);
+
+            //test.DeleteUser(user1);
+            //test.DeleteUser(user2);
+            //test2.DeleteTeam(team1);
+            //test.Save();
+            //_db.SaveChanges();
+
 
         }
 
