@@ -15,5 +15,6 @@ namespace Domain
         bool DeleteRank(Rank rank);
         bool AlreadyExists(Rank rank);
         bool InitializeRanks(Team team);
+        void Save();
     }
 }
