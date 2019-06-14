@@ -15,15 +15,20 @@ namespace Data
 
         public bool AddRank(Rank rank)
         {
-            /*_db.Rank.Add(Mapper.Map(rank));
-            _db.SaveChanges();
-            return true;*/
-            throw new NotImplementedException();
+            if (AlreadyExists(rank))
+                return false;
+            _db.Rank.Add(Mapper.Map(rank));
+            Save();
+            return true;
         }
 
         public bool DeleteRank(Rank rank)
         {
-            throw new NotImplementedException();
+            if (!AlreadyExists(rank))
+                return false;
+            _db.Rank.Remove(Mapper.Map(rank));
+            Save();
+            return true;
         }
 
         public bool AlreadyExists(Rank rank)
@@ -41,13 +46,18 @@ namespace Data
 
         public List<Rank> GetAllRanks()
         {
-            //return _db.Rank.Select(x => Mapper.Map(x));
-            throw new NotImplementedException();
+            List<Rank> ranklist = new List<Rank>();
+            var elems = _db.Rank;
+            foreach (var elem in elems)
+            {
+                ranklist.Add(Mapper.Map(elem));
+            }
+            return ranklist;
         }
 
         public List<Rank> GetRank(string teamname, string gamemode)
         {/*
-            var list = GetRanksByTeam(team);
+            var ranklist = GetRanksByTeam(teamname);
             var rank;
             foreach (var r in list)
             {
@@ -65,17 +75,35 @@ namespace Data
 
         public List<Rank> GetRanksByMode(string gamemode)
         {
-            throw new NotImplementedException();
+            List<Rank> ranklist = new List<Rank>();
+            var allranks = GetAllRanks();
+            foreach (var elem in allranks)
+            {
+                if (elem.gamemode == gamemode)
+                    ranklist.Add(elem);
+            }
+            return ranklist;
         }
 
         public List<Rank> GetRanksByTeam(string team)
         {
-            throw new NotImplementedException();
+            List<Rank> ranklist = new List<Rank>();
+            var allranks = GetAllRanks();
+            foreach (var elem in allranks)
+            {
+                if (elem.team.teamname == team)
+                    ranklist.Add(elem);
+            }
+            return ranklist;
         }
 
         public bool UpdateRank(Rank rank)
         {
-            throw new NotImplementedException();
+            if (!AlreadyExists(rank))
+                return false;
+            _db.Update(Mapper.Map(rank));
+            Save();
+            return true;
         }
 
         public bool InitializeRanks(Team team)
@@ -90,6 +118,11 @@ namespace Data
                 AddRank(rank);
             }
             return true;
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
         }
     }
 }
