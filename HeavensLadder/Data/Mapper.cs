@@ -40,15 +40,36 @@ namespace Data
         public static Data.Entities.Team Map(Domain.Team dmTeam)
         {
             Data.Entities.Team deTeam = new Entities.Team();
-            //deTeam.id = dmTeam.id;
+            List<Data.Entities.UserTeam> deUserTeam = new List<Entities.UserTeam>();
+            for (int i = 0; i < dmTeam.Userlist.Count; i++)
+            {
+                deUserTeam[i].Leader = dmTeam.Roles[i];
+                deUserTeam[i].Userid = dmTeam.Userlist[i].id;
+            }
+            if (dmTeam.id != null)
+            {
+                deTeam.Id = (int)dmTeam.id;
+            }
             deTeam.Teamname = dmTeam.teamname;
             return deTeam;
         }
-        public static Domain.Team Map(Data.Entities.Team deTeam) => new Domain.Team
+        public static Domain.Team Map(Data.Entities.Team deTeam)
         {
-           // id = deTeam.id,
-            teamname = deTeam.Teamname,
-        };
+            Domain.Team dmTeam = new Domain.Team();
+            dmTeam.id = deTeam.Id;
+            dmTeam.teamname = deTeam.Teamname;
+            int i = 0;
+            foreach(var item in deTeam.UserTeam)
+            {
+                dmTeam.Roles.Add(item.Leader);
+                dmTeam.Userlist.Add(Map(item.User));
+                i += 1;
+            }
+            
+
+            return dmTeam;
+            
+        }
 
         public static Data.Entities.Rank Map(Domain.Rank dmRank)
         {
