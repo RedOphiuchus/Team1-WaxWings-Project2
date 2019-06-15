@@ -30,15 +30,29 @@ namespace Data
         public bool AddUser(Domain.User user)
         {
             bool check = false;
-            _db.User.Add(Mapper.Map(user));
+            Data.Entities.User x = _db.User.Where(a => a.Username.Equals(user.username)).FirstOrDefault();
+            if (x != null)
+            {
+                check = false;
+            }
+            else
+            {
+                _db.User.Add(Mapper.Map(user));
+                check = true;
+            }
             return check;
         }
         public bool DeleteUser(Domain.User user)
         {
-            bool check = false;
-            //_db.User.Remove(_db.User.Find(user.username));
-            _db.User.Remove(_db.User.Where(a => a.Username == user.username).FirstOrDefault());
-            return check;
+            bool success = false;
+            Data.Entities.User x = _db.User.Where(a => a.Username.Equals(user.username)).FirstOrDefault();
+            if (x != null)
+            {
+                _db.User.Remove(x);
+                _db.SaveChanges();
+                success = true;
+            }
+            return success;
         }
         public bool validatelogin(string username, string password)
         {
