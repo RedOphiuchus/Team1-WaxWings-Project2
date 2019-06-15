@@ -6,7 +6,11 @@ namespace Domain
 {
     public class Challenge
     {
-        public int id { get; set; }
+        public int? id { get; set; }
+
+        public int? sideAId { get; set; }
+
+        public int? sideBId { get; set; }
 
         public Team Team1 { get; set; }
 
@@ -15,21 +19,22 @@ namespace Domain
 
         public bool? Team2Report { get; set; }
 
-        public string GameMode { get; set; }
+        public int? GameModeId { get; set; }
 
-        public Challenge(Team team1, Team team2, string gameMode)
+
+        public Challenge(Team team1, Team team2, int gameMode)
         {
             Team1 = team1;
             Team2 = team2;
-            GameMode = gameMode;
+            GameModeId = gameMode;
         }
 
-        public Challenge(int id, Team team1, Team team2, string gameMode, bool? team1Report, bool? team2Report)
+        public Challenge(int id, Team team1, Team team2, int gameMode, bool? team1Report, bool? team2Report)
         {
             this.id = id;
             Team1 = team1;
             Team2 = team2;
-            GameMode = gameMode;
+            GameModeId = gameMode;
             Team1Report = team1Report;
             Team2Report = team2Report;
         }

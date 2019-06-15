@@ -24,18 +24,47 @@ namespace Data
             password = deUser.Password,
         };
         ////Todo Complete
-        //public static Data.Entities.Challenge Map(Domain.Challenge dmChallenge)
-        //{
-        //    Data.Entities.Challenge deChallenge = new Entities.Challenge();
-        //    deChallenge.Id = dmChallenge.id;
+        public static Data.Entities.Challenge Map(Domain.Challenge dmChallenge)
+        {
+            Data.Entities.Challenge deChallenge = new Entities.Challenge();
+            if(dmChallenge.id != null)
+                deChallenge.Id = (int)dmChallenge.id;
 
-        //    return deChallenge;
-        //}
+            Data.Entities.Sides SideA = new Data.Entities.Sides();
+            if (dmChallenge.sideAId != null)
+            {
+                SideA.Id = (int)dmChallenge.sideAId;
+            }
+            //SideA.Teamid = dmChallenge.Team1.id;
+            SideA.Winreport = dmChallenge.Team1Report;
+            deChallenge.Sides.Add(SideA);
+
+            Data.Entities.Sides SideB = new Data.Entities.Sides();
+            if(dmChallenge.sideBId != null)
+            {
+                SideB.Id = (int) dmChallenge.sideBId;
+            }
+            //SideB.Teamid = dmChallenge.Team2.id;
+            SideB.Winreport = dmChallenge.Team2Report;
+            deChallenge.Sides.Add(SideB);
+
+            if(dmChallenge.GameModeId != null)
+                deChallenge.GameModeId = (int) dmChallenge.GameModeId;
+            return deChallenge;
+        }
         ////Todo Complete
-        //public static Domain.Challenge Map(Data.Entities.Challenge deChallenge) => new Domain.Challenge
-        //{
-        //    id = deChallenge.Id,
-        //};
+        public static Domain.Challenge Map(Data.Entities.Challenge deChallenge)
+        {
+            List<Domain.Team> teams = new List<Domain.Team>();
+            List<bool?> results = new List<bool?>();
+            foreach(var side in deChallenge.Sides)
+            {
+                teams.Add(Map(side.Team));
+                results.Add(side.Winreport);
+            }
+            Domain.Challenge dmChallenge = new Domain.Challenge(deChallenge.Id, teams[0], teams[1], (int)deChallenge.GameModeId, results[0], results[1]);
+            return dmChallenge;
+        }
 
         public static Data.Entities.Team Map(Domain.Team dmTeam)
         {

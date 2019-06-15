@@ -16,18 +16,18 @@ namespace Test
             Domain.Team team2 = new Domain.Team();
 
             //act
-            Domain.Challenge ch1 = new Domain.Challenge(team1, team2, "Deathmatch");
-            Domain.Challenge ch2 = new Domain.Challenge(0, team1, team2, "Deathmatch", true, false);
-            Domain.Challenge ch3 = new Domain.Challenge(0, team1, team2, "Deathmatch", null, null);
+            Domain.Challenge ch1 = new Domain.Challenge(team1, team2, 0);
+            Domain.Challenge ch2 = new Domain.Challenge(0, team1, team2, 0, true, false);
+            Domain.Challenge ch3 = new Domain.Challenge(0, team1, team2, 0, null, null);
 
             //assert
             Assert.AreEqual(ch1.Team1, team1);
             Assert.AreEqual(ch1.Team2, team2);
-            Assert.AreEqual(ch1.GameMode, "Deathmatch");
+            Assert.AreEqual(ch1.GameModeId, 0);
 
             Assert.AreEqual(ch2.Team1, team1);
             Assert.AreEqual(ch2.Team2, team2);
-            Assert.AreEqual(ch2.GameMode, "Deathmatch");
+            Assert.AreEqual(ch2.GameModeId, 0);
             Assert.AreEqual(ch2.Team1Report, true);
             Assert.AreEqual(ch2.Team2Report, false);
 
@@ -41,13 +41,13 @@ namespace Test
             //Arrange
             Domain.Team team1 = new Domain.Team();
             Domain.Team team2 = new Domain.Team();
-            Domain.Challenge ch1 = new Domain.Challenge(0, team1, team2, "Deathmatch", true, false);
-            Domain.Challenge ch2 = new Domain.Challenge(0, team1, team2, "Deathmatch", false, true);
-            Domain.Challenge ch3 = new Domain.Challenge(0, team1, team2, "Deathmatch", true, true);
-            Domain.Challenge ch4 = new Domain.Challenge(0, team1, team2, "Deathmatch", false, false);
-            Domain.Challenge ch5 = new Domain.Challenge(0, team1, team2, "Deathmatch", null, false);
-            Domain.Challenge ch6 = new Domain.Challenge(0, team1, team2, "Deathmatch", true, null);
-            Domain.Challenge chn = new Domain.Challenge(0, team1, team2, "Deathmatch", null, null);
+            Domain.Challenge ch1 = new Domain.Challenge(0, team1, team2, 0, true, false);
+            Domain.Challenge ch2 = new Domain.Challenge(0, team1, team2, 0, false, true);
+            Domain.Challenge ch3 = new Domain.Challenge(0, team1, team2, 0, true, true);
+            Domain.Challenge ch4 = new Domain.Challenge(0, team1, team2, 0, false, false);
+            Domain.Challenge ch5 = new Domain.Challenge(0, team1, team2, 0, null, false);
+            Domain.Challenge ch6 = new Domain.Challenge(0, team1, team2, 0, true, null);
+            Domain.Challenge chn = new Domain.Challenge(0, team1, team2, 0, null, null);
 
             bool? team1Win;
             bool? team2Win;
@@ -84,11 +84,11 @@ namespace Test
             Domain.Team team1 = new Domain.Team();
             Domain.Team team2 = new Domain.Team();
             Domain.Team team3 = new Domain.Team();
-            Domain.Challenge ch1 = new Domain.Challenge(team1, team2, "Deathmatch");
-            Domain.Challenge ch2 = new Domain.Challenge(team1, team2, "Deathmatch");
-            Domain.Challenge ch3 = new Domain.Challenge(team1, team2, "Deathmatch");
-            Domain.Challenge ch4 = new Domain.Challenge(team1, team2, "Deathmatch");
-            Domain.Challenge ch5 = new Domain.Challenge(team1, team2, "Deathmatch");
+            Domain.Challenge ch1 = new Domain.Challenge(team1, team2, 0);
+            Domain.Challenge ch2 = new Domain.Challenge(team1, team2, 0);
+            Domain.Challenge ch3 = new Domain.Challenge(team1, team2, 0);
+            Domain.Challenge ch4 = new Domain.Challenge(team1, team2, 0);
+            Domain.Challenge ch5 = new Domain.Challenge(team1, team2, 0);
             bool teamNotInChallenge;
             bool team1UpdateSucceeded;
             bool team2UpdateSucceeded;
