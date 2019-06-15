@@ -69,23 +69,44 @@ namespace Data
         public static Data.Entities.Team Map(Domain.Team dmTeam)
         {
             Data.Entities.Team deTeam = new Entities.Team();
-            //deTeam.id = dmTeam.id;
+            List<Data.Entities.UserTeam> deUserTeam = new List<Entities.UserTeam>();
+            for (int i = 0; i < dmTeam.Userlist.Count; i++)
+            {
+                deUserTeam[i].Leader = dmTeam.Roles[i];
+                deUserTeam[i].Userid = dmTeam.Userlist[i].id;
+            }
+            if (dmTeam.id != null)
+            {
+                deTeam.Id = (int)dmTeam.id;
+            }
             deTeam.Teamname = dmTeam.teamname;
             return deTeam;
         }
-        public static Domain.Team Map(Data.Entities.Team deTeam) => new Domain.Team
+        public static Domain.Team Map(Data.Entities.Team deTeam)
         {
-           // id = deTeam.id,
-            teamname = deTeam.Teamname,
-        };
+            Domain.Team dmTeam = new Domain.Team();
+            dmTeam.id = deTeam.Id;
+            dmTeam.teamname = deTeam.Teamname;
+            int i = 0;
+            foreach(var item in deTeam.UserTeam)
+            {
+                dmTeam.Roles.Add(item.Leader);
+                dmTeam.Userlist.Add(Map(item.User));
+                i += 1;
+            }
+            
+
+            return dmTeam;
+            
+        }
 
         public static Data.Entities.Rank Map(Domain.Rank dmRank)
         {
             Data.Entities.Rank deRank = new Entities.Rank();
-            deRank.Team = Map(dmRank.team);
-            Data.Entities.GameModes deGame = new Entities.GameModes();
-            deGame.Modename = dmRank.gamemode;
-            deRank.Gamemode = deGame;
+            //deRank.Teamid = dmRank.Team.id;
+            if (dmRank.id != null)
+                deRank.Id = (int)dmRank.id;
+            deRank.Gamemodeid = dmRank.gamemodeid;
             deRank.Rank1 = dmRank.ranking;
             deRank.Wins = dmRank.wins;
             deRank.Losses = dmRank.losses;
@@ -93,10 +114,11 @@ namespace Data
             return deRank;
         }
 
-        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemode.Modename)
+        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemode.Id)
         {
+            id = deRank.Id,
             team = Map(deRank.Team),
-            gamemode = deRank.Gamemode.Modename,
+            gamemodeid = deRank.Gamemode.Id,
             ranking = deRank.Rank1,
             wins = deRank.Wins,
             losses = deRank.Losses

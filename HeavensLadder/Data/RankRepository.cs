@@ -5,7 +5,7 @@ using Domain;
 
 namespace Data
 {
-    class RankRepository : IRankRepository
+    public class RankRepository : IRankRepository
     {
         private readonly Entities.HLContext _db;
         public RankRepository(Entities.HLContext db)
@@ -33,13 +33,18 @@ namespace Data
 
         public bool AlreadyExists(Rank rank)
         {
-            var name = rank.team.teamname;
-            var game = rank.gamemode;
+            var team = rank.team;
+            var game = rank.gamemodeid;
             var ranklist = _db.Rank;
-            foreach (var elem in ranklist)
+            if (ranklist == null)
+                return false;
+            foreach (Data.Entities.Rank elem in ranklist)
             {
-                if (elem.Team.Teamname == name && elem.Gamemode.Modename == game)
-                    return true;
+                if (elem != null)
+                {
+                    if (elem.Team.Teamname == team.teamname && elem.Gamemode.Id == game)
+                        return true;
+                }
             }
             return false;
         }
@@ -55,31 +60,31 @@ namespace Data
             return ranklist;
         }
 
-        public List<Rank> GetRank(string teamname, string gamemode)
-        {/*
+        public Rank GetRank(string teamname, int gamemode)
+        {
+            Team team = new Team();
+            team.teamname = teamname;
             var ranklist = GetRanksByTeam(teamname);
-            var rank;
-            foreach (var r in list)
+            Rank rank = null;
+            foreach (var r in ranklist)
             {
-                if (r.gamemode == gamemode)
-                    rank = r;
+                if (r.gamemodeid == gamemode)
+                    rank = new Rank(team, gamemode);
             }
-            //var element = _db.Rank.Where(a => a.team.name.Contains(team.name)).FirstOrDefault();
 
             if (rank != null)
-                return Mapper.Map(rank);
+                return rank;
             else
-                return null;*/
-            throw new NotImplementedException();
+                return null;
         }
 
-        public List<Rank> GetRanksByMode(string gamemode)
+        public List<Rank> GetRanksByMode(int gamemode)
         {
             List<Rank> ranklist = new List<Rank>();
             var allranks = GetAllRanks();
             foreach (var elem in allranks)
             {
-                if (elem.gamemode == gamemode)
+                if (elem.gamemodeid == gamemode)
                     ranklist.Add(elem);
             }
             return ranklist;
@@ -112,7 +117,7 @@ namespace Data
             var gamemodes = _db.GameModes;        
             foreach (var elem in gamemodes)
             {
-                rank = new Rank(team, elem.Modename);
+                rank = new Rank(team, elem.Id);
                 if (AlreadyExists(rank))
                     return false;
                 AddRank(rank);

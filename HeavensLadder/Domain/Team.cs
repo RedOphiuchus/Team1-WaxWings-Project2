@@ -12,6 +12,7 @@ namespace Domain
         public List<Boolean> Roles;
         public List<User> Userlist;
         public int rank;
+        public int? id;
 
 
 
