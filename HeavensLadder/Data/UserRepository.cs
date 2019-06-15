@@ -27,6 +27,14 @@ namespace Data
             else
                 return null;
         }
+        public Domain.User GetUserByUsername(string username)
+        {
+            var element = _db.User.Where(a => a.Username == username).FirstOrDefault();
+            if (element != null)
+                return Mapper.Map(element);
+            else
+                return null;
+        }
         public bool AddUser(Domain.User user)
         {
             bool check = false;

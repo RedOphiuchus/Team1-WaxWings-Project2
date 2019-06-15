@@ -206,12 +206,31 @@ namespace Test
             bool expected = true;
             test.AddUser(user1);
             test.AddUser(user2);
-            //test.Save();
-            Domain.Team team1 = new Domain.Team(user1);
+            int userinteam1id1 = 0;
+            int userinteam1id2 = 0;
+            test.Save();
+            var usersinteam1 = test.GetUsers();
+            foreach (var userinteam1 in usersinteam1)
+            {
+                if (userinteam1.username == "Carlos")
+                {
+                    userinteam1id1 = userinteam1.id;
+                }
+                if (userinteam1.username == "Akash")
+                {
+                    userinteam1id2 = userinteam1.id;
+                }
+            }
+            var user1inteam2 = test.GetUserByUserid(userinteam1id1);
+            var user2inteam2 = test.GetUserByUserid(userinteam1id2);
+            Domain.Team team1 = new Domain.Team(user1inteam2);
             team1.teamname = "Team1";
-            team1.AddMember(user2);
+            
+            //var team1got = test2.GetByTeamName("Team1");
             test2.AddTeam(team1);
             //test.Save();
+            _db.SaveChanges();
+            team1.AddMember(user2inteam2);
             _db.SaveChanges();
             //var deteam = Mapper.Map(team1);
 
@@ -237,9 +256,9 @@ namespace Test
             //Assert.AreEqual(expected, actual1);
             //Assert.AreEqual(expected, actual2);
 
-            test.DeleteUser(user1);
-            test.DeleteUser(user2);
-            test2.DeleteTeam(team1);
+            //test.DeleteUser(user1);
+            //test.DeleteUser(user2);
+            //test2.DeleteTeam(team1);
             test.Save();
             _db.SaveChanges();
 

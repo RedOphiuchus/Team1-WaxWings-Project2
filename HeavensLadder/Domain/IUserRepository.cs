@@ -8,6 +8,7 @@ namespace Domain
     {
         IEnumerable<Domain.User> GetUsers();
         User GetUserByUserid(int userid);
+        User GetUserByUsername(string username);
         bool AddUser(Domain.User user);
         bool DeleteUser(Domain.User user);
         bool validatelogin(string username, string password);
