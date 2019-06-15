@@ -74,7 +74,7 @@ namespace Data
         public static Data.Entities.Rank Map(Domain.Rank dmRank)
         {
             Data.Entities.Rank deRank = new Entities.Rank();
-            //deRank.Teamid = dmRank.Team.id;
+            deRank.Teamid = (int)dmRank.team.id;
             if (dmRank.id != null)
                 deRank.Id = (int)dmRank.id;
             deRank.Gamemodeid = dmRank.gamemodeid;

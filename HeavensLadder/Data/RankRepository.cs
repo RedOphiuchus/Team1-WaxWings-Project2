@@ -42,7 +42,7 @@ namespace Data
             {
                 if (elem != null)
                 {
-                    if (elem.Team.Teamname == team.teamname && elem.Gamemode.Id == game)
+                    if (elem.Team.Id == team.id && elem.Gamemode.Id == game)
                         return true;
                 }
             }
