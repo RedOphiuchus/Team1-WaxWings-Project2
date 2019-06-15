@@ -51,6 +51,7 @@ namespace Data
                     deUserTeam.Add(soloUserTeam);
                 }
             }
+
             if (dmTeam.id != null)
             {
                 deTeam.Id = (int)dmTeam.id;
