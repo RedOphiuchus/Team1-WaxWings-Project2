@@ -14,19 +14,18 @@ namespace Test
         {
             Team team1 = new Team();
             team1.teamname = "testteam";
-            string gamemode = "Deathmatch";
+            int gamemode = 1;
             Rank rank1 = new Rank(team1, gamemode);
 
             Assert.AreEqual("testteam", rank1.team.teamname);
-            Assert.AreEqual("Deathmatch", rank1.gamemode);
+            Assert.AreEqual(1, rank1.gamemodeid);
 
             Team team2 = new Team();
             team2.teamname = "dreamteam";
-            gamemode = "Deathmatch";
             Rank rank2 = new Rank(team2, gamemode);
 
             Assert.AreNotEqual(rank1.team.teamname, rank2.team.teamname);
-            Assert.AreEqual(rank1.gamemode, rank2.gamemode);
+            Assert.AreEqual(rank1.gamemodeid, rank2.gamemodeid);
         }
 
         [TestMethod]
@@ -34,7 +33,7 @@ namespace Test
         {
             Team team1 = new Team();
             team1.teamname = "testteam";
-            string gamemode = "Deathmatch";
+            int gamemode = 1;
             Rank rank = new Rank(team1, gamemode);
 
             Assert.AreEqual(rank.wins, 0);
@@ -47,12 +46,12 @@ namespace Test
         {
             Team team1 = new Team();
             team1.teamname = "testteam";
-            string gamemode = "Deathmatch";
+            int gamemode = 1;
             Rank rank = new Rank(team1, gamemode);
 
             Assert.AreEqual(rank.losses, 0);
             rank.AddLoss();
             Assert.AreEqual(rank.losses, 1);
-        }
+        }        
     }
 }

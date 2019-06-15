@@ -75,22 +75,28 @@ namespace Data
         {
             Data.Entities.Rank deRank = new Entities.Rank();
             deRank.Team = Map(dmRank.team);
-            deRank.Gamemode.Modename = dmRank.gamemode;
+            Data.Entities.GameModes deGame = new Entities.GameModes();
+            if (dmRank.id != null)
+                deRank.Id = (int)dmRank.id;
+            deGame.Id = dmRank.gamemodeid;
+            deRank.Gamemode = deGame;
             deRank.Rank1 = dmRank.ranking;
             deRank.Wins = dmRank.wins;
             deRank.Losses = dmRank.losses;
 
             return deRank;
         }
-        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemode.Modename)
+
+        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemode.Id)
         {
+            id = deRank.Id,
             team = Map(deRank.Team),
-            gamemode = deRank.Gamemode.Modename,
+            gamemodeid = deRank.Gamemode.Id,
             ranking = deRank.Rank1,
             wins = deRank.Wins,
             losses = deRank.Losses
-        };
-        
+        };        
+
         //public static Data.Entities.DirectMessage Map(Domain.DirectMessage dmDirectMessage)
         //{
         //    Data.Entities.DirectMessage deDirectMessage = new Entities.DirectMessage();
