@@ -43,6 +43,7 @@ namespace Data
             {
                 int id = x.Id;
                 _db.Team.Remove(x);
+                _db.SaveChanges();
                 //set boolean to true to indicate that we successfully added a team
                 success = true;
             }
@@ -157,6 +158,7 @@ namespace Data
 
 
                 }
+                x.Add(team);
 
             }
 
@@ -176,7 +178,7 @@ namespace Data
             List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamID).ToList();
 
             //step 4, now i gotta loop through the list of userTeams to get some datas for my team
-            for (i = 0; i > deUserTeam.Count(); i++)
+            for (i = 0; i < deUserTeam.Count(); i++)
             {
                 //now I want to add the user and the role, role is easy
                 something.Roles.Add(deUserTeam[i].Leader);

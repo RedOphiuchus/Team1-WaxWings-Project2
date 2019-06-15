@@ -17,14 +17,14 @@ namespace Test
         public void TestMapDomainToData()
         {
             Domain.Team team1 = new Domain.Team();
-            team1.teamname = "testteam";
+            team1.id = 500;
             int gamemode = 1;
             Domain.Rank domrank = new Domain.Rank(team1, gamemode);
 
             Data.Entities.Rank datrank = Data.Mapper.Map(domrank);
 
-            Assert.AreEqual(datrank.Team.Teamname, "testteam");           
-            Assert.AreEqual(datrank.Gamemode.Id, 1);
+            Assert.AreEqual(datrank.Teamid, 500);           
+            Assert.AreEqual(datrank.Gamemodeid, 1);
         }
 
         [TestMethod]
@@ -50,14 +50,22 @@ namespace Test
         {
             _db = new Data.Entities.HLContext();
             test = new Data.RankRepository(_db);
+            Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
             Domain.Team team = new Domain.Team();
             team.teamname = "testteam";
+            teamrepo.AddTeam(team);
+            _db.SaveChanges();
+
             int gameid = 1;
-            Domain.Rank rank = new Domain.Rank(team, gameid);
+            Domain.Team newteam = teamrepo.GetByTeamName("testteam");
+            Domain.Rank rank = new Domain.Rank(newteam, gameid);
 
             bool exists = test.AlreadyExists(rank);
-                        
+            // should not already exist, since it was never added to the database            
             Assert.AreEqual(exists, false);
+
+            teamrepo.DeleteTeam(team);
+            _db.SaveChanges();
         }
         /*
         [TestMethod]

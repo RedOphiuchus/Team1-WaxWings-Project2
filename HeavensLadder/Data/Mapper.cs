@@ -70,15 +70,22 @@ namespace Data
         {
             Data.Entities.Team deTeam = new Entities.Team();
             List<Data.Entities.UserTeam> deUserTeam = new List<Entities.UserTeam>();
-            for (int i = 0; i < dmTeam.Userlist.Count; i++)
+            if (dmTeam.Userlist.Count > 0 && dmTeam.Userlist.Count==dmTeam.Roles.Count)
             {
-                deUserTeam[i].Leader = dmTeam.Roles[i];
-                deUserTeam[i].Userid = dmTeam.Userlist[i].id;
+                for (int i = 0; i < dmTeam.Userlist.Count; i++)
+                {
+                    Data.Entities.UserTeam soloUserTeam = new Data.Entities.UserTeam();
+
+                    soloUserTeam.Leader = dmTeam.Roles[i];
+                    soloUserTeam.Userid = dmTeam.Userlist[i].id;
+                    deUserTeam.Add(soloUserTeam);
+                }
             }
             if (dmTeam.id != null)
             {
                 deTeam.Id = (int)dmTeam.id;
             }
+            
             deTeam.Teamname = dmTeam.teamname;
             return deTeam;
         }
@@ -94,6 +101,11 @@ namespace Data
                 dmTeam.Userlist.Add(Map(item.User));
                 i += 1;
             }
+
+            foreach(var item in deTeam.Rank)
+            {
+                dmTeam.rank.Add(item.Rank1);
+            }
             
 
             return dmTeam;
@@ -103,14 +115,13 @@ namespace Data
         public static Data.Entities.Rank Map(Domain.Rank dmRank)
         {
             Data.Entities.Rank deRank = new Entities.Rank();
-            //deRank.Teamid = dmRank.Team.id;
+            deRank.Teamid = (int)dmRank.team.id;
             if (dmRank.id != null)
                 deRank.Id = (int)dmRank.id;
             deRank.Gamemodeid = dmRank.gamemodeid;
             deRank.Rank1 = dmRank.ranking;
             deRank.Wins = dmRank.wins;
             deRank.Losses = dmRank.losses;
-
             return deRank;
         }
 
