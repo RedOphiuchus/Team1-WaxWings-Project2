@@ -46,7 +46,6 @@ namespace Data
                 for (int i = 0; i < dmTeam.Userlist.Count; i++)
                 {
                     Data.Entities.UserTeam soloUserTeam = new Data.Entities.UserTeam();
-
                     soloUserTeam.Leader = dmTeam.Roles[i];
                     soloUserTeam.Userid = dmTeam.Userlist[i].id;
                     deUserTeam.Add(soloUserTeam);
@@ -56,7 +55,7 @@ namespace Data
             {
                 deTeam.Id = (int)dmTeam.id;
             }
-            
+            deTeam.UserTeam = deUserTeam;
             deTeam.Teamname = dmTeam.teamname;
             return deTeam;
         }

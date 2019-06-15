@@ -14,10 +14,6 @@ namespace Test
         Data.Entities.HLContext _db;
         Data.TeamRepository test;
 
-
-
-
-
         [TestMethod]
         public void AddAndRemoveTeamTest()
         {
@@ -104,45 +100,54 @@ namespace Test
             Data.Entities.HLContext _db = new Data.Entities.HLContext();
             Data.TeamRepository test = new Data.TeamRepository(_db);
             Data.UserRepository usertest = new Data.UserRepository(_db);
+            bool success;
+
+            
+
 
             Domain.Team miteam = new Domain.Team();
             miteam.teamname = "grisaia";
-            Domain.User user = new Domain.User("username1", "password1");
-            miteam.Userlist.Add(user);
+            Domain.User user1 = new Domain.User("username1", "password1");
+            miteam.Userlist.Add(user1);
             miteam.Roles.Add(true);
 
+           
+
+            //remove user from db if it exist
+            success = usertest.DeleteUser(user1);
+            //add user to the database;
+            success = usertest.AddUser(user1);
+
+            //remove team from db if it exist
+            success = test.DeleteTeam(miteam);
+            //add team to database
+            success = test.AddTeam(miteam);
+
+            //create the userteam entity from the above.
+            IEnumerable<Data.Entities.UserTeam> userteam = Mapper.Map(miteam).UserTeam;
       
-          
+
 
 
             Domain.Team newteam = test.GetByTeamName("grisaia");
+
+            
+
+            
+
+            //remove stuffs from database.
+            success = test.DeleteTeam(miteam);
+            success = usertest.DeleteUser(user1);
+            foreach (var element in Mapper.Map(miteam).UserTeam)
+            {
+                _db.UserTeam.Remove(element);
+            }
+
             Assert.AreEqual(newteam.Userlist.Count, miteam.Userlist.Count);
             Assert.AreEqual(newteam.Roles.Count, miteam.Roles.Count);
-            
 
         }
 
-        /*
-         these are the object(s) that I need in the DB to work!
-
-        Data.Entities.User user = new Data.Entities.User();
-        user.username = "username1";
-        user.password = "password1";
-        user.id = 19;
-
-        Data.Entities.UserTeam userteam = new Data.Entities.UserTeam();
-        userteam.id = 1; //not sure if need
-        userteam.teamid = 28;
-        userteam.userid = 19;
-        userteam.leader = 1;
-
-        Data.Entities.Team team = new Data.Entities.Team();
-        team.teamname = "grisaia";
-        team.id = 28;
-
-
-         */
-       
 
     }
 }
