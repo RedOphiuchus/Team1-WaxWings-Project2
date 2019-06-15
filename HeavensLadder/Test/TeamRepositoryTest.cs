@@ -88,23 +88,61 @@ namespace Test
         }
 
         [TestMethod]
+        public void GetUserTeamsTest()
+        {
+            Data.Entities.HLContext _db = new Data.Entities.HLContext();
+            Data.TeamRepository test = new Data.TeamRepository(_db);
+
+            Domain.User user = new Domain.User("username1", "password1");
+            List<Domain.Team> teamlist = test.GetUserTeams(user);
+            Assert.AreNotEqual(teamlist, null);
+        }
+
+        [TestMethod]
         public void GetByTeamNameTest()
         {
             Data.Entities.HLContext _db = new Data.Entities.HLContext();
             Data.TeamRepository test = new Data.TeamRepository(_db);
+            Data.UserRepository usertest = new Data.UserRepository(_db);
 
             Domain.Team miteam = new Domain.Team();
             miteam.teamname = "grisaia";
             Domain.User user = new Domain.User("username1", "password1");
             miteam.Userlist.Add(user);
             miteam.Roles.Add(true);
-            bool success = test.AddTeam(miteam);
+
+      
+          
+
 
             Domain.Team newteam = test.GetByTeamName("grisaia");
+            Assert.AreEqual(newteam.Userlist.Count, miteam.Userlist.Count);
+            Assert.AreEqual(newteam.Roles.Count, miteam.Roles.Count);
             
 
         }
 
+        /*
+         these are the object(s) that I need in the DB to work!
+
+        Data.Entities.User user = new Data.Entities.User();
+        user.username = "username1";
+        user.password = "password1";
+        user.id = 19;
+
+        Data.Entities.UserTeam userteam = new Data.Entities.UserTeam();
+        userteam.id = 1; //not sure if need
+        userteam.teamid = 28;
+        userteam.userid = 19;
+        userteam.leader = 1;
+
+        Data.Entities.Team team = new Data.Entities.Team();
+        team.teamname = "grisaia";
+        team.id = 28;
+
+
+         */
+       
 
     }
 }
