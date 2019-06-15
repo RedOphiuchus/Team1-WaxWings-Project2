@@ -35,7 +35,7 @@ namespace Data
             {
                 SideA.Id = (int)dmChallenge.sideAId;
             }
-            //SideA.Teamid = dmChallenge.Team1.id;
+            SideA.Teamid = (int)dmChallenge.Team1.id;
             SideA.Winreport = dmChallenge.Team1Report;
             deChallenge.Sides.Add(SideA);
 
@@ -44,7 +44,7 @@ namespace Data
             {
                 SideB.Id = (int) dmChallenge.sideBId;
             }
-            //SideB.Teamid = dmChallenge.Team2.id;
+            SideB.Teamid = (int)dmChallenge.Team2.id;
             SideB.Winreport = dmChallenge.Team2Report;
             deChallenge.Sides.Add(SideB);
 
