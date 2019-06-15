@@ -213,6 +213,7 @@ namespace Test
             test2.AddTeam(team1);
             //test.Save();
             _db.SaveChanges();
+            //var deteam = Mapper.Map(team1);
 
             //var usersinteamlist = test.TeamUsers(team1.teamname);
             //foreach (var userinteamlist in usersinteamlist)
@@ -236,11 +237,11 @@ namespace Test
             //Assert.AreEqual(expected, actual1);
             //Assert.AreEqual(expected, actual2);
 
-            //test.DeleteUser(user1);
-            //test.DeleteUser(user2);
-            //test2.DeleteTeam(team1);
-            //test.Save();
-            //_db.SaveChanges();
+            test.DeleteUser(user1);
+            test.DeleteUser(user2);
+            test2.DeleteTeam(team1);
+            test.Save();
+            _db.SaveChanges();
 
 
         }
