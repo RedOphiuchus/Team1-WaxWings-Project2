@@ -17,12 +17,19 @@ variables:
   pathToTest: 'HeavensLadder/Test'
 
 steps:
+
+
+- task: SonarCloudAnalyze@1
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: $(pathSolution)
-- script: dotnet test --configuration $(buildConfiguration) --no-build
-  workingDirectory: $(pathSolution)
-  displayName: 'dotnet HeavensLadder'
+
+
+#- script: dotnet test --configuration $(buildConfiguration) --no-build
+#  workingDirectory: $(pathSolution)
+#  displayName: 'dotnet HeavensLadder'
+
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
