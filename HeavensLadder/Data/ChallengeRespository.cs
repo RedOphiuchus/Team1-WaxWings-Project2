@@ -67,6 +67,12 @@ namespace Data
             {
                 _db.Entry(dbcha).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
             }
+            foreach(var side in cha.Sides)
+            {
+                Data.Entities.Sides rmSide;
+                if((rmSide = _db.Sides.Find(side.Id)) != null)
+                    _db.Entry(rmSide).State = Microsoft.EntityFrameworkCore.EntityState.Detached;          
+            }
             _db.Challenge.Update(cha);
             _db.SaveChanges();
             return true;
