@@ -22,6 +22,8 @@ namespace Test
             user1.password = "uniquepassword";
             team1.Userlist.Add(user1);
             team1.Roles.Add(true);
+            team1.id = 1;
+
 
             var deteam1 = Mapper.Map(team1);
 
@@ -29,6 +31,8 @@ namespace Test
 
             Assert.AreEqual(deteam1.Teamname, team1.teamname);
             Assert.AreEqual(deteam1.Id, 1);
+            Assert.AreEqual(deteam1.UserTeam.Count,1);
+
         }
 
         [TestMethod]
