@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Domain;
 using System.Collections.ObjectModel;
@@ -66,6 +67,8 @@ namespace Data
                 results.Add(side.Winreport);
             }
             Domain.Challenge dmChallenge = new Domain.Challenge(deChallenge.Id, teams[0], teams[1], (int)deChallenge.GameModeId, results[0], results[1]);
+            dmChallenge.sideAId = deChallenge.Sides.ToList()[0].Id;
+            dmChallenge.sideBId = deChallenge.Sides.ToList()[1].Id;
             return dmChallenge;
         }
 

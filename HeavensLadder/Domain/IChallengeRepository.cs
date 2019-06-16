@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Domain
 {
-    interface IChallengeRepository
+    public interface IChallengeRepository
     {
         List<Challenge> GetTeamChallenges(string teamname);
         List<Challenge> GetUnresolvedTeamChallenges(string teamname);

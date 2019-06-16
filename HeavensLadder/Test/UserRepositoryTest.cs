@@ -211,7 +211,19 @@ namespace Test
             var user1inteam2 = test.GetUserByUsername(username);
             var user2inteam2 = test.GetUserByUsername(username2);
 
-            Domain.Team team1 = new Domain.Team(user1inteam2);
+            List<Domain.User> usersinteam1 = new List<Domain.User>();
+            usersinteam1.Add(user1inteam2);
+            usersinteam1.Add(user2inteam2);
+
+            bool user1role = true;
+            bool user2role = false;
+
+            List <Boolean> team1roleslist = new List<Boolean>();
+
+            team1roleslist.Add(user1role);
+            team1roleslist.Add(user2role);
+
+            Domain.Team team1 = new Domain.Team(usersinteam1, team1roleslist);
             team1.teamname = "Team1";
             
             test2.AddTeam(team1);
@@ -219,7 +231,6 @@ namespace Test
             var team1got = test2.GetByTeamName("Team1");
             Assert.AreEqual(team1got.teamname, "Team1");
 
-            team1got.AddMember(user2inteam2);
             _db.SaveChanges();
 
             var usersinteamlist = test.TeamUsers(team1.teamname);
@@ -236,15 +247,13 @@ namespace Test
             }
 
             Assert.AreEqual(expected, actual1);
-            //Assert.AreEqual(expected, actual2);
+            Assert.AreEqual(expected, actual2);
 
             test.DeleteUser(user1inteam2);
             test.DeleteUser(user2inteam2);
             test2.DeleteTeam(team1got);
             test.Save();
             _db.SaveChanges();
-
-
         }
 
         [TestMethod]
