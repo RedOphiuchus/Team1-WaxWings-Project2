@@ -206,59 +206,41 @@ namespace Test
             bool expected = true;
             test.AddUser(user1);
             test.AddUser(user2);
-            int userinteam1id1 = 0;
-            int userinteam1id2 = 0;
             test.Save();
-            var usersinteam1 = test.GetUsers();
-            foreach (var userinteam1 in usersinteam1)
-            {
-                if (userinteam1.username == "Carlos")
-                {
-                    userinteam1id1 = userinteam1.id;
-                }
-                if (userinteam1.username == "Akash")
-                {
-                    userinteam1id2 = userinteam1.id;
-                }
-            }
-            var user1inteam2 = test.GetUserByUserid(userinteam1id1);
-            var user2inteam2 = test.GetUserByUserid(userinteam1id2);
+
+            var user1inteam2 = test.GetUserByUsername(username);
+            var user2inteam2 = test.GetUserByUsername(username2);
+
             Domain.Team team1 = new Domain.Team(user1inteam2);
             team1.teamname = "Team1";
             
-            //var team1got = test2.GetByTeamName("Team1");
             test2.AddTeam(team1);
-            //test.Save();
             _db.SaveChanges();
-            team1.AddMember(user2inteam2);
+            var team1got = test2.GetByTeamName("Team1");
+            Assert.AreEqual(team1got.teamname, "Team1");
+
+            team1got.AddMember(user2inteam2);
             _db.SaveChanges();
-            //var deteam = Mapper.Map(team1);
 
-            //var usersinteamlist = test.TeamUsers(team1.teamname);
-            //foreach (var userinteamlist in usersinteamlist)
-            //{
-            //    if (userinteamlist.id == 1)
-            //    {
-            //        if (userinteamlist.username == username)
-            //        {
-            //            actual1 = true;
-            //        }
-            //    }
-            //    if (userinteamlist.id == 2)
-            //    {
-            //        if (userinteamlist.username == username2)
-            //        {
-            //            actual2 = true;
-            //        }
-            //    }
-            //}
+            var usersinteamlist = test.TeamUsers(team1.teamname);
+            foreach (var userinteamlist in usersinteamlist)
+            {
+                if (userinteamlist.username == username)
+                {
+                    actual1 = true;
+                }
+                if (userinteamlist.username == username2)
+                {
+                    actual2 = true;
+                }
+            }
 
-            //Assert.AreEqual(expected, actual1);
+            Assert.AreEqual(expected, actual1);
             //Assert.AreEqual(expected, actual2);
 
-            //test.DeleteUser(user1);
-            //test.DeleteUser(user2);
-            //test2.DeleteTeam(team1);
+            test.DeleteUser(user1inteam2);
+            test.DeleteUser(user2inteam2);
+            test2.DeleteTeam(team1got);
             test.Save();
             _db.SaveChanges();
 
