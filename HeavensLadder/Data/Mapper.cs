@@ -55,6 +55,8 @@ namespace Data
         ////Todo Complete
         public static Domain.Challenge Map(Data.Entities.Challenge deChallenge)
         {
+            if (deChallenge.Sides.Count != 2)
+                return null;
             List<Domain.Team> teams = new List<Domain.Team>();
             List<bool?> results = new List<bool?>();
             foreach(var side in deChallenge.Sides)
