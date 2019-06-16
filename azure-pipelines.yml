@@ -17,7 +17,13 @@ variables:
   pathToTest: 'HeavensLadder/Test'
 
 steps:
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'HeavensLadderAnalysis'
+    organization: '1905-may06-dotnet'
+    scannerMode: 'MSBuild'
+    projectKey: '72dcf32adceb949f8c71fc4c13cc24312518c196'
+    projectName: 'Team1-WaxWings-Project2'
 
 - task: SonarCloudAnalyze@1
 
