@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
@@ -31,7 +32,7 @@ namespace Data
 
         public List<Challenge> GetTeamChallenges(string teamname)
         {
-            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).ToList();
+            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).Include("Sides.Team").ToList();
             List<Challenge> output = new List<Challenge>();
             foreach(var cha in chas)
             {
@@ -43,7 +44,7 @@ namespace Data
 
         public List<Challenge> GetUnresolvedTeamChallenges(string teamname)
         {
-            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).ToList();
+            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).Include("Sides.Team").ToList();
             chas = chas.Where(c => (c.Sides.ToList()[0].Winreport == null) || (c.Sides.ToList()[1].Winreport == null)).ToList();
             List<Challenge> output = new List<Challenge>();
             foreach (var cha in chas)
