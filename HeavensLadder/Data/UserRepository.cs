@@ -57,7 +57,7 @@ namespace Data
             if (x != null)
             {
                 _db.User.Remove(x);
-                _db.SaveChanges();
+                //_db.SaveChanges();
                 success = true;
             }
             return success;
