@@ -36,10 +36,10 @@ steps:
 #    WebAppName: 'HeavensLadder'
 #    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
-    appType: 'webApp'
-    appName: 'HeavensLadder'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+#- task: AzureWebApp@1
+#  inputs:
+#    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
+#    appType: 'webApp'
+#    appName: 'HeavensLadder'
+#    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#    deploymentMethod: 'auto'
