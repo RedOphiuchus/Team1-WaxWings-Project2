@@ -71,8 +71,10 @@ namespace Test
       
             //need to add user to db and pull it to get a stupid id
             success = usertest.DeleteUser(user);
+            usertest.Save();
             //add user to the database;
             success = usertest.AddUser(user);
+            usertest.Save();
             if (!success)
             {
                 Assert.Fail();
@@ -152,8 +154,10 @@ namespace Test
 
             //remove user from db if it exist
             success = usertest.DeleteUser(user1);
+            usertest.Save();
             //add user to the database;
             success = usertest.AddUser(user1);
+            usertest.Save();
             if(!success)
             {
                 Assert.Fail();
