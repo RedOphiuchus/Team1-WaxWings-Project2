@@ -12,12 +12,22 @@ namespace Test
         [TestMethod]
         public void teammapperdetest()
         {
-            string team1name = "akashteam";
+            //team
             Domain.Team team1 = new Domain.Team();
-            team1.teamname = team1name;
-            team1.id = 1;
+            team1.teamname = "akashteam";
+
+            //user
+            Domain.User user1 = new Domain.User();
+            user1.username = "uniqueusername";
+            user1.password = "uniquepassword";
+            team1.Userlist.Add(user1);
+            team1.Roles.Add(true);
+
             var deteam1 = Mapper.Map(team1);
-            Assert.AreEqual(deteam1.Teamname, team1name);
+
+
+
+            Assert.AreEqual(deteam1.Teamname, team1.teamname);
             Assert.AreEqual(deteam1.Id, 1);
         }
 

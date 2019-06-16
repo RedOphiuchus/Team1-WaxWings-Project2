@@ -38,7 +38,21 @@ namespace Data
             bool success = false;
             //search database to ensure that the team already exists in the database
             Data.Entities.Team x = _db.Team.Where(a => a.Teamname.Equals(team.teamname)).FirstOrDefault();
-            //if the team does exist, remove the team from the database
+
+            //if the team does exist, remove the team from the database, but first, delete the userteams associated with it
+            if (x != null)
+            {
+                IEnumerable<Data.Entities.UserTeam> y = x.UserTeam;
+                if (y != null)
+                {
+                    foreach (var item in y)
+                    {
+                        _db.UserTeam.Remove(item);
+
+                    }
+                    _db.SaveChanges();
+                }
+            }
             if (x != null)
             {
                 int id = x.Id;

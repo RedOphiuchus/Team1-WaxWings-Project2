@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Data.Entities;
 using Data;
+using System.Linq;
 
 namespace Test
 {
@@ -13,10 +14,6 @@ namespace Test
     {
         Data.Entities.HLContext _db;
         Data.TeamRepository test;
-
-
-
-
 
         [TestMethod]
         public void AddAndRemoveTeamTest()
@@ -56,6 +53,9 @@ namespace Test
         {
             Data.Entities.HLContext _db = new Data.Entities.HLContext();
             Data.TeamRepository test = new Data.TeamRepository(_db);
+            Data.UserRepository usertest = new Data.UserRepository(_db);
+
+
             bool what; //random bool to hold data about success of methods.
             bool success; //initialize boolean for asserts
             //first case, we pass the method a faulty team check for null case and count case.
@@ -68,8 +68,24 @@ namespace Test
             team.teamname = "testteamname";
 
             Domain.User user = new Domain.User("username1","password1");
+      
+            //need to add user to db and pull it to get a stupid id
+            success = usertest.DeleteUser(user);
+            //add user to the database;
+            success = usertest.AddUser(user);
+            if (!success)
+            {
+                Assert.Fail();
+            }
+            _db.SaveChanges();
+
+            //obtain the user from the database so it has the userID
+            var x = _db.User.Where(a => a.Username.Equals(user.username)).FirstOrDefault();
+            Domain.User user1withID = Mapper.Map(x);
+
             team.Roles.Add(true);
-            team.Userlist.Add(user);
+            team.Userlist.Add(user1withID);
+
             what = test.DeleteTeam(team);
             what = test.AddTeam(team);
 
@@ -77,6 +93,8 @@ namespace Test
             Assert.AreEqual(success, true);
             //keep database clean and undo my add.
             what = test.DeleteTeam(team);
+
+
 
             //third test case for when we have a faulty team with more roles than users, it should fail
             team.Roles.Add(false);
@@ -104,45 +122,104 @@ namespace Test
             Data.Entities.HLContext _db = new Data.Entities.HLContext();
             Data.TeamRepository test = new Data.TeamRepository(_db);
             Data.UserRepository usertest = new Data.UserRepository(_db);
+            bool success;
+
+            
+
 
             Domain.Team miteam = new Domain.Team();
             miteam.teamname = "grisaia";
-            Domain.User user = new Domain.User("username1", "password1");
-            miteam.Userlist.Add(user);
+            Domain.User user1 = new Domain.User("username1", "password1");
+            
+            /*
+            //get team id for next query
+            Data.Entities.Team ii = _db.Team.Where(ss => ss.Teamname.Equals("grisaia")).FirstOrDefault();
+            //first remove all userteams associated with this team
+            IEnumerable<Data.Entities.UserTeam> grisaiausers = _db.UserTeam.Where(a => a.Teamid == ii.Id);
+            _db.SaveChanges();
+            if (grisaiausers.GetEnumerator()!=null)
+            {
+                foreach (var item in grisaiausers)
+                {
+                    _db.UserTeam.Remove(item);
+                   
+                }
+                _db.SaveChanges();
+
+
+            }
+            */
+
+            //remove user from db if it exist
+            success = usertest.DeleteUser(user1);
+            //add user to the database;
+            success = usertest.AddUser(user1);
+            if(!success)
+            {
+                Assert.Fail();
+            }
+            _db.SaveChanges();
+
+            //obtain the user from the database so it has the userID
+            var x = _db.User.Where(a => a.Username.Equals(user1.username)).FirstOrDefault();
+            Domain.User user1withID = Mapper.Map(x);
+
+            miteam.Userlist.Add(user1withID);
             miteam.Roles.Add(true);
 
-      
-          
+            //remove team from db if it exist
+            success = test.DeleteTeam(miteam);
+            //add team to database
+            success = test.AddTeam(miteam);
+
+
+            
+
+            //obtain the team from the database so it has a teamID
+            var y = _db.Team.Where(gg => gg.Teamname.Equals(miteam.teamname)).FirstOrDefault();
+            Domain.Team miteamwithID = Mapper.Map(y);
+            miteamwithID.Userlist.Add(user1withID);
+            miteamwithID.Roles.Add(true);
+
+            //create the userteam entity from the above.
+            IEnumerable<Data.Entities.UserTeam> userteam = Mapper.Map(miteam).UserTeam;
+
+         
+
+
+            
 
 
             Domain.Team newteam = test.GetByTeamName("grisaia");
-            Assert.AreEqual(newteam.Userlist.Count, miteam.Userlist.Count);
-            Assert.AreEqual(newteam.Roles.Count, miteam.Roles.Count);
+
             
 
+            
+
+            
+            
+            Assert.AreEqual(newteam.Userlist.Count, miteam.Userlist.Count);
+            Assert.AreEqual(newteam.Roles.Count, miteam.Roles.Count);
+
+            //remove stuffs from database.
+
+            
+            //delete the userteam enetities in the database if they are already there
+            foreach (var item in userteam)
+            {
+                var uu = _db.UserTeam.Where(gg => gg.Id == item.Id).FirstOrDefault();
+                if(uu != null)
+                {
+                    _db.UserTeam.Remove(item);
+                    _db.SaveChanges();
+                }
+            }
+            
+            success = test.DeleteTeam(miteamwithID);
+            success = usertest.DeleteUser(user1withID);
+            
         }
 
-        /*
-         these are the object(s) that I need in the DB to work!
-
-        Data.Entities.User user = new Data.Entities.User();
-        user.username = "username1";
-        user.password = "password1";
-        user.id = 19;
-
-        Data.Entities.UserTeam userteam = new Data.Entities.UserTeam();
-        userteam.id = 1; //not sure if need
-        userteam.teamid = 28;
-        userteam.userid = 19;
-        userteam.leader = 1;
-
-        Data.Entities.Team team = new Data.Entities.Team();
-        team.teamname = "grisaia";
-        team.id = 28;
-
-
-         */
-       
 
     }
 }

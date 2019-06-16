@@ -77,17 +77,17 @@ namespace Data
                 for (int i = 0; i < dmTeam.Userlist.Count; i++)
                 {
                     Data.Entities.UserTeam soloUserTeam = new Data.Entities.UserTeam();
-
                     soloUserTeam.Leader = dmTeam.Roles[i];
                     soloUserTeam.Userid = dmTeam.Userlist[i].id;
                     deUserTeam.Add(soloUserTeam);
                 }
             }
+
             if (dmTeam.id != null)
             {
                 deTeam.Id = (int)dmTeam.id;
             }
-            
+            deTeam.UserTeam = deUserTeam;
             deTeam.Teamname = dmTeam.teamname;
             return deTeam;
         }
@@ -117,7 +117,8 @@ namespace Data
         public static Data.Entities.Rank Map(Domain.Rank dmRank)
         {
             Data.Entities.Rank deRank = new Entities.Rank();
-            deRank.Teamid = (int)dmRank.team.id;
+            if (dmRank.team.id != null)
+                deRank.Teamid = (int)dmRank.team.id;
             if (dmRank.id != null)
                 deRank.Id = (int)dmRank.id;
             deRank.Gamemodeid = dmRank.gamemodeid;

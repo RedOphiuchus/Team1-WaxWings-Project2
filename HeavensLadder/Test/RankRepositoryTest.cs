@@ -52,17 +52,50 @@ namespace Test
             test = new Data.RankRepository(_db);
             Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
             Domain.Team team = new Domain.Team();
-            team.teamname = "testteam";
+            team.teamname = "testteam123";
             teamrepo.AddTeam(team);
             _db.SaveChanges();
 
             int gameid = 1;
-            Domain.Team newteam = teamrepo.GetByTeamName("testteam");
+            Domain.Team newteam = teamrepo.GetByTeamName("testteam123");
             Domain.Rank rank = new Domain.Rank(newteam, gameid);
 
             bool exists = test.AlreadyExists(rank);
             // should not already exist, since it was never added to the database            
             Assert.AreEqual(exists, false);
+
+            teamrepo.DeleteTeam(team);
+            _db.SaveChanges();
+        }
+
+        [TestMethod]
+        public void TestAddAndDeleteRank()
+        {
+            _db = new Data.Entities.HLContext();
+            test = new Data.RankRepository(_db);
+            Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
+            Domain.Team team = new Domain.Team();
+            team.teamname = "testteam123";
+            teamrepo.AddTeam(team);
+            _db.SaveChanges();
+
+            int gameid = 1;
+            Domain.Team newteam = teamrepo.GetByTeamName("testteam123");
+            Domain.Rank rank = new Domain.Rank(newteam, gameid);
+
+            bool add = test.AddRank(rank);
+            test.Save();
+            Assert.AreEqual(add, true);
+            bool repeateadd = test.AddRank(rank);
+            test.Save();
+            Assert.AreEqual(repeateadd, false);
+
+            bool delete = test.DeleteRank(rank);
+            test.Save();
+            Assert.AreEqual(delete, true);
+            bool repeatdelete = test.DeleteRank(rank);
+            test.Save();
+            Assert.AreEqual(repeatdelete, false);
 
             teamrepo.DeleteTeam(team);
             _db.SaveChanges();
