@@ -206,23 +206,28 @@ namespace Test
             bool expected = true;
             test.AddUser(user1);
             test.AddUser(user2);
-            int userinteam1id1 = 0;
-            int userinteam1id2 = 0;
+            //int userinteam1id1 = 0;
+            //int userinteam1id2 = 0;
             test.Save();
-            var usersinteam1 = test.GetUsers();
-            foreach (var userinteam1 in usersinteam1)
-            {
-                if (userinteam1.username == "Carlos")
-                {
-                    userinteam1id1 = userinteam1.id;
-                }
-                if (userinteam1.username == "Akash")
-                {
-                    userinteam1id2 = userinteam1.id;
-                }
-            }
-            var user1inteam2 = test.GetUserByUserid(userinteam1id1);
-            var user2inteam2 = test.GetUserByUserid(userinteam1id2);
+
+            var user1inteam2 = test.GetUserByUsername(username);
+            var user2inteam2 = test.GetUserByUsername(username2);
+
+            //var usersinteam1 = test.GetUsers();
+            //foreach (var userinteam1 in usersinteam1)
+            //{
+            //    if (userinteam1.username == "Carlos")
+            //    {
+            //        userinteam1id1 = userinteam1.id;
+            //    }
+            //    if (userinteam1.username == "Akash")
+            //    {
+            //        userinteam1id2 = userinteam1.id;
+            //    }
+            //}
+            //var user1inteam2 = test.GetUserByUserid(userinteam1id1);
+            //var user2inteam2 = test.GetUserByUserid(userinteam1id2);
+
             //Domain.Team team1 = new Domain.Team(user1inteam2);
             Domain.Team team1 = new Domain.Team(user1inteam2);
             team1.teamname = "Team1";
