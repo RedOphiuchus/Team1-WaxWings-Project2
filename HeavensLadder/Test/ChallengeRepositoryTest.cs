@@ -32,7 +32,7 @@ namespace Test
             Team Test2 = TRepo.GetByTeamName(team2.teamname);
 
 
-            Challenge cha = new Challenge(Test1, Test2, 0);
+            Challenge cha = new Challenge(Test1, Test2, 1);
 
             //Act
 
@@ -46,7 +46,7 @@ namespace Test
             Assert.IsTrue(addSuccess);
             Assert.AreEqual(team1.teamname, outCha.Team1.teamname);
             Assert.AreEqual(team2.teamname, outCha.Team2.teamname);
-            Assert.AreEqual(0, outCha.GameModeId);
+            Assert.AreEqual(1, outCha.GameModeId);
 
         }
     }

@@ -19,10 +19,10 @@ namespace Data
         public bool AddChallenge(Challenge challenge)
         {
             Data.Entities.Challenge cha = Mapper.Map(challenge);
-            if (cha != null)
+            if (cha == null)
                 return false;
 
-            if (_db.Find<Data.Entities.Challenge>(cha) != null)
+            if (_db.Challenge.Find(cha.Id) != null)
                 return false;
 
             _db.Challenge.Add(cha);
@@ -32,11 +32,12 @@ namespace Data
 
         public List<Challenge> GetTeamChallenges(string teamname)
         {
-            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).Include("Sides.Team").ToList();
+            List<Data.Entities.Challenge> chas = _db.Challenge.Include("Sides.Team").ToList();
             List<Challenge> output = new List<Challenge>();
             foreach(var cha in chas)
             {
-                output.Add(Mapper.Map(cha));
+                if(cha.Sides.ToList()[0].Team.Teamname == teamname || cha.Sides.ToList()[1].Team.Teamname == teamname)
+                    output.Add(Mapper.Map(cha));
             }
 
             return output;
@@ -58,11 +59,11 @@ namespace Data
         public bool UpdateChallenge(Challenge challenge)
         {
             Data.Entities.Challenge cha = Mapper.Map(challenge);
-            if (cha != null)
+            if (cha == null)
                 return false;
 
             Data.Entities.Challenge dbcha;
-            if ((dbcha =_db.Find<Data.Entities.Challenge>(cha)) != null)
+            if ((dbcha =_db.Challenge.Find(cha.Id)) != null)
             {
                 _db.Entry(dbcha).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
             }
@@ -74,14 +75,22 @@ namespace Data
         public bool DeleteChallenge(Challenge challenge)
         {
             Data.Entities.Challenge cha = Mapper.Map(challenge);
-            if (cha != null)
+            if (cha == null)
                 return false;
 
+            List<Data.Entities.Sides> sides = _db.Sides.ToList();
+            foreach(var side in sides)
+            {
+                if (side.Challengeid == cha.Id)
+                    _db.Sides.Remove(side);
+            }
+            _db.SaveChanges();
             Data.Entities.Challenge dbcha;
-            if ((dbcha = _db.Find<Data.Entities.Challenge>(cha)) != null)
+            if ((dbcha = _db.Challenge.Find(cha.Id)) != null)
             {
                 _db.Entry(dbcha).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
             }
+            cha.Sides.Clear();
             _db.Challenge.Remove(cha);
             _db.SaveChanges();
             return true;
