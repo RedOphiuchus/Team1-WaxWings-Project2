@@ -97,7 +97,7 @@ namespace Test
             test.Save();
             Assert.AreEqual(repeatdelete, false);
 
-            teamrepo.DeleteTeam(team);
+            teamrepo.DeleteTeam(newteam);
             _db.SaveChanges();
         }
         /*
