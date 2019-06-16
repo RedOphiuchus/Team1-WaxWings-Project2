@@ -238,9 +238,9 @@ namespace Test
             Assert.AreEqual(expected, actual1);
             //Assert.AreEqual(expected, actual2);
 
-            test.DeleteUser(user1inteam2);
-            test.DeleteUser(user2inteam2);
-            test2.DeleteTeam(team1got);
+            //test.DeleteUser(user1inteam2);
+            //test.DeleteUser(user2inteam2);
+            //test2.DeleteTeam(team1got);
             test.Save();
             _db.SaveChanges();
 
