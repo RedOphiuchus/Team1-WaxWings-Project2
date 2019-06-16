@@ -29,6 +29,41 @@ namespace Data
                 _db.SaveChanges();
                 success = true;
             }
+            //now, we need to add its userteams
+            //now, I want to add the elements from this team into the userteam table
+
+            List<User> DomainUser = team.Userlist;
+            List<bool> DomainRole = team.Roles;
+
+            //reobtain the current team from the database to obtain its ID
+            Data.Entities.Team DBteam = _db.Team.Where(a => a.Teamname.Equals(team.teamname)).FirstOrDefault();
+
+            for (int i = 0; i < DomainUser.Count(); i++)
+            {
+                //determine the ID for each individual user in the team
+                Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i])).FirstOrDefault();
+                if (DBUser == null)
+                {
+                    //if the user didnt exist, we do not add any userteams
+                }
+                else
+                {
+                    //here we add each user into the userteam table
+                    Data.Entities.UserTeam userteam = new Data.Entities.UserTeam();
+                    userteam.Teamid = DBteam.Id;
+                    userteam.Leader = DomainRole[i];
+                    userteam.Userid = DBUser.Id;
+                    _db.UserTeam.Add(userteam);
+                    _db.SaveChanges();
+                }
+            }
+
+
+
+
+
+
+
             return success;
         }
 
@@ -75,21 +110,24 @@ namespace Data
             {
                 int DBTeamID = DBTeam.Id;
                 //next, determine the elements in the USERTEAM table that have that teams ID
-                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(p => p.Id == DBTeamID).ToList();
+                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(p => p.Teamid == DBTeamID).ToList();
                 //now, remove those elements from the userteam table
-                foreach (var item in DBUserTeam)
+                if (DBUserTeam.Count > 0)
                 {
-                    _db.UserTeam.Remove(item);
+                    foreach (var item in DBUserTeam)
+                    {
+                        _db.UserTeam.Remove(item);
+                    }
                 }
                 //now, I want to add the elements from this team into the userteam table
 
                 List<User> DomainUser = team.Userlist;
                 List<bool> DomainRole = team.Roles;
 
-                for(i=0; i>DomainUser.Count(); i++)
+                for(i=0; i<DomainUser.Count(); i++)
                 {
                     //determine the ID for each individual user in the team
-                    Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i])).FirstOrDefault();
+                    Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i].username)).FirstOrDefault();
                     if (DBUser == null)
                     {
                         //if the user didnt exist, we want to stop the program and return false
