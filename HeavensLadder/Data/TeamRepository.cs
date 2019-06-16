@@ -210,6 +210,9 @@ namespace Data
 
 
             something.teamname = deteam.Teamname;
+
+            //add team id to the team
+            something.id = teamID;
            
             
             return something;
