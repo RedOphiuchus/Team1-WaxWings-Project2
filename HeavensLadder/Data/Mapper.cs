@@ -132,11 +132,11 @@ namespace Data
             return deRank;
         }
 
-        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemode.Id)
+        public static Domain.Rank Map(Data.Entities.Rank deRank) => new Domain.Rank(Map(deRank.Team), deRank.Gamemodeid)
         {
             id = deRank.Id,
             team = Map(deRank.Team),
-            gamemodeid = deRank.Gamemode.Id,
+            gamemodeid = deRank.Gamemodeid,
             ranking = deRank.Rank1,
             wins = deRank.Wins,
             losses = deRank.Losses
