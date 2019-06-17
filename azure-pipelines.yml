@@ -39,6 +39,9 @@ steps:
 
 - task: SonarCloudAnalyze@1
 
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 #- script: dotnet test --configuration $(buildConfiguration) --no-build
 #  workingDirectory: $(pathSolution)
