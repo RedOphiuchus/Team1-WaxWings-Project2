@@ -27,6 +27,10 @@ namespace Data
         {
             if (!AlreadyExists(rank))
                 return false;
+            if (_db.Rank.Find(rank.id) != null)
+            {
+                _db.Entry(_db.Rank.Find(rank.id)).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            }
             _db.Rank.Remove(Mapper.Map(rank));
             Save();
             return true;
@@ -36,8 +40,8 @@ namespace Data
         {
             var team = rank.team;
             var game = rank.gamemodeid;
-            var ranklist = _db.Rank.Where(x=>x.Id >= 0);
-            if (ranklist == null)
+            var ranklist = _db.Rank.Where(x => x.Id >= 0).ToList();
+            if (ranklist.Count == 0)
                 return false;
             foreach (Data.Entities.Rank elem in ranklist)
             {
@@ -54,7 +58,7 @@ namespace Data
         {
             List<Rank> ranklist = new List<Rank>();
             //changed this part to return all ranks in the db.
-            var elems = _db.Rank.Where(x => x.Id >= 0);
+            var elems = _db.Rank.Where(x => x.Id >= 0).ToList();
             foreach (var elem in elems)
             {
                 ranklist.Add(Mapper.Map(elem));
@@ -71,7 +75,7 @@ namespace Data
             foreach (var r in ranklist)
             {
                 if (r.gamemodeid == gamemode)
-                    rank = new Rank(team, gamemode);
+                    rank = r;
             }
 
             if (rank != null)
@@ -108,6 +112,10 @@ namespace Data
         {
             if (!AlreadyExists(rank))
                 return false;
+            if (_db.Rank.Find(rank.id) != null)
+            {
+                _db.Entry(_db.Rank.Find(rank.id)).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+            }
             _db.Update(Mapper.Map(rank));
             Save();
             return true;

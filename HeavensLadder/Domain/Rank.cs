@@ -39,11 +39,13 @@ namespace Domain
 
         public decimal CalculateRank()
         {
-            int totalgames = this.wins + this.losses;
+            int totalgames = wins + losses;
+            int ranking = 0;
             if (totalgames == 0)
-                return 0;
+                return ranking;
             //add logic for calculating rank here, possibly using a Bernoulli parameter
-            return 0;
+            ranking = totalgames + wins - losses;
+            return ranking;
         }
     }
 }
