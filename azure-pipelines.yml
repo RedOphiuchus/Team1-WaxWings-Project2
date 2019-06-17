@@ -1,4 +1,4 @@
-# ASP.NET Core
+ ASP.NET Core
 
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
@@ -17,12 +17,20 @@ variables:
   pathToTest: 'HeavensLadder/Test'
 
 steps:
+#- task: SonarCloudPrepare@1
+#  inputs:
+#    SonarCloud: 'HeavensLadderAnalysis'
+#    organization: '1905-may06-dotnet'
+#    scannerMode: 'MSBuild'
+#    projectKey: '72dcf32adceb949f8c71fc4c13cc24312518c196'
+#    projectName: 'Team1-WaxWings-Project2'
+
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'HeavensLadderAnalysis'
-    organization: '1905-may06-dotnet'
+    SonarCloud: 'HeavensLadderFork'
+    organization: 'redophiuchus-github'
     scannerMode: 'MSBuild'
-    projectKey: '72dcf32adceb949f8c71fc4c13cc24312518c196'
+    projectKey: '8d0d4c1bf69089cb09ba51ee237438c315b12da3'
     projectName: 'Team1-WaxWings-Project2'
 
 - script: dotnet build --configuration $(buildConfiguration)
