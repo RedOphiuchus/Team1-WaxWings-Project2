@@ -44,10 +44,10 @@ steps:
 #  workingDirectory: $(pathSolution)
 #  displayName: 'dotnet HeavensLadder'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    projects: '$(projectPath)/*.csproj'
+#- task: DotNetCoreCLI@2
+#  inputs:
+#    command: 'publish'
+#    projects: '$(projectPath)/*.csproj'
 
 #- task: AzureRmWebAppDeployment@4
 #  inputs:
