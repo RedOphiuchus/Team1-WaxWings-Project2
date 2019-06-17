@@ -166,7 +166,8 @@ namespace Test
             
             newrank.AddWin();
             test.UpdateRank(newrank);
-            Assert.AreEqual(newrank.wins, 1);
+            var uprank = test.GetRank("testteam", 1);
+            Assert.AreEqual(uprank.wins, 1);
 
             test.DeleteRank(newrank);
             teamrepo.DeleteTeam(newteam);
