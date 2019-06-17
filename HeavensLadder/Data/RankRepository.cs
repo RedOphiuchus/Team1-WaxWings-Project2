@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Domain;
+using System.Linq;
 
 namespace Data
 {
@@ -35,14 +36,14 @@ namespace Data
         {
             var team = rank.team;
             var game = rank.gamemodeid;
-            var ranklist = _db.Rank;
+            var ranklist = _db.Rank.Where(x=>x.Id >= 0);
             if (ranklist == null)
                 return false;
             foreach (Data.Entities.Rank elem in ranklist)
             {
                 if (elem != null)
                 {
-                    if (elem.Team.Id == team.id && elem.Gamemode.Id == game)
+                    if (elem.Teamid == team.id && elem.Gamemodeid == game)
                         return true;
                 }
             }
@@ -52,7 +53,8 @@ namespace Data
         public List<Rank> GetAllRanks()
         {
             List<Rank> ranklist = new List<Rank>();
-            var elems = _db.Rank;
+            //changed this part to return all ranks in the db.
+            var elems = _db.Rank.Where(x => x.Id >= 0);
             foreach (var elem in elems)
             {
                 ranklist.Add(Mapper.Map(elem));

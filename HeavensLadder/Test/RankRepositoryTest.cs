@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain;
 using Data.Entities;
+using System.Linq;
 
 namespace Test
 {
@@ -60,11 +61,16 @@ namespace Test
             Domain.Team newteam = teamrepo.GetByTeamName("testteam123");
             Domain.Rank rank = new Domain.Rank(newteam, gameid);
 
+            //still working on this part
+           // Rank testrank = _db.Rank.Where(x => x.)
+
+            test.DeleteRank(rank);
             bool exists = test.AlreadyExists(rank);
             // should not already exist, since it was never added to the database            
             Assert.AreEqual(exists, false);
 
-            teamrepo.DeleteTeam(team);
+            //changed team to newteam so it matches the code
+            teamrepo.DeleteTeam(newteam);
             _db.SaveChanges();
         }
 
