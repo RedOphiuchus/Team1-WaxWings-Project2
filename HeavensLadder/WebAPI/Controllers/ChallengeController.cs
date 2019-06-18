@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ChallengeController")]
     [ApiController]
     public class ChallengeController : ControllerBase
     {
+        /*
         // GET: api/Challenge
         [HttpGet]
         public IEnumerable<string> Get()
@@ -42,5 +43,6 @@ namespace WebAPI.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }

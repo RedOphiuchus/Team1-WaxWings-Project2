@@ -4,13 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Domain;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/RankController")]
     [ApiController]
     public class RankController : ControllerBase
     {
+        /*
         // GET: api/Rank
         [HttpGet]
         public IEnumerable<string> Get()
@@ -42,5 +44,8 @@ namespace WebAPI.Controllers
         public void Delete(int id)
         {
         }
+
+    */
     }
+    
 }
