@@ -45,10 +45,9 @@ namespace Data
                 return false;
             foreach (Data.Entities.Rank elem in ranklist)
             {
-                if (elem != null)
+                if (elem != null & elem.Teamid == team.id && elem.Gamemodeid == game)
                 {
-                    if (elem.Teamid == team.id && elem.Gamemodeid == game)
-                        return true;
+                    return true;
                 }
             }
             return false;
@@ -68,8 +67,6 @@ namespace Data
 
         public Rank GetRank(string teamname, int gamemode)
         {
-            Team team = new Team();
-            team.teamname = teamname;
             var ranklist = GetRanksByTeam(teamname);
             Rank rank = null;
             foreach (var r in ranklist)
@@ -96,13 +93,13 @@ namespace Data
             return ranklist;
         }
 
-        public List<Rank> GetRanksByTeam(string team)
+        public List<Rank> GetRanksByTeam(string teamname)
         {
             List<Rank> ranklist = new List<Rank>();
             var allranks = GetAllRanks();
             foreach (var elem in allranks)
             {
-                if (elem.team.teamname == team)
+                if (elem.team.teamname == teamname)
                     ranklist.Add(elem);
             }
             return ranklist;

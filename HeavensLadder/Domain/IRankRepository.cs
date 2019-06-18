@@ -9,7 +9,7 @@ namespace Domain
         List<Rank> GetAllRanks();
         List<Rank> GetRanksByMode(int gamemode);
         List<Rank> GetRanksByTeam(string teamname);
-        Rank GetRank(string team, int gamemode);
+        Rank GetRank(string teamname, int gamemode);
         bool AddRank(Rank rank);
         bool UpdateRank(Rank rank);
         bool DeleteRank(Rank rank);
