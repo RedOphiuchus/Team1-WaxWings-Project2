@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Domain;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +13,44 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        //intialize repository objects so that we can use the repository methods
+        private readonly IUserRepository _UserRepository;
+        public UserController(IUserRepository UserRepository)
+        {
+            _UserRepository = UserRepository;
+        }
+
+        // GET boolean for username
+        [HttpGet("{username}")]
+        public ActionResult<bool> ValidateUsername(string username)
+        {
+            return _UserRepository.validateusername(username);
+        }
+
+        // GET boolean for login
+        [HttpGet("{username}/{password}")]
+        public ActionResult<bool> ValidateLogin(string username,string password)
+        {
+            return _UserRepository.validatelogin(username,password);
+        }
+
+        // GET boolean for login
+        [HttpPost("Register/{username}/{password}")]
+        public ActionResult<bool> Register(string username, string password)
+        {
+            bool validated = _UserRepository.validateusername(username);
+            if (validated == false)
+            {
+                Domain.User user1 = new Domain.User(username,password);
+
+                _UserRepository.AddUser(user1);
+                _UserRepository.Save();
+            }
+
+            return _UserRepository.validateusername(username);
+        }
+
+        /*
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
@@ -24,7 +64,7 @@ namespace WebAPI.Controllers
         {
             return "value";
         }
-
+        */
         // POST: api/User
         [HttpPost]
         public void Post([FromBody] string value)

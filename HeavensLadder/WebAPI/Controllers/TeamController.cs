@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/TeamController")]
     [ApiController]
     public class TeamController : ControllerBase
     {
-        // GET: api/Team
+      /*  // GET: api/Team
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -42,5 +42,9 @@ namespace WebAPI.Controllers
         public void Delete(int id)
         {
         }
+
+    */
     }
+
+    
 }
