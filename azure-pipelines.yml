@@ -13,7 +13,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
   projectPath: 'HeavensLadder/API'
-  pathSolution: 'HeavensLadder'
+  pathSolution: 'HeavensLadder/'
   pathToTest: 'HeavensLadder/Test'
 
 steps:
@@ -50,14 +50,16 @@ steps:
     Contents: 'ConnectionString.txt'
     TargetFolder: 'HeavensLadder/Data'
 
-- script: dotnet test --configuration $(buildConfiguration) --no-build
-    --logger trx
-    --results-directory $(Build.ArtifactStagingDirectory)/test/
+- script: dotnet test
+   --configuration $(buildConfiguration) 
+   --no-build
+   --logger trx
+   --results-directory $(Build.ArtifactStagingDirectory)/test/
       /p:CollectCoverage=true
       /p:CoverletOutputFormat=opencover
       /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
   workingDirectory: $(pathSolution)
-  displayName: 'dotnet HeavensLadder'
+  displayName: 'dotnet Test'
 
 - task: SonarCloudAnalyze@1
 
