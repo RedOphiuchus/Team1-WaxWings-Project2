@@ -9,8 +9,6 @@ namespace Test
     [TestClass]
     public class UserRepositoryTest
     {
-        Data.Entities.HLContext _db;
-        Data.UserRepository test;
 
         [TestMethod]
         public void getuserstest()
@@ -23,7 +21,6 @@ namespace Test
             string password2 = "Pinder";
             bool expected = true;
             bool actual = false;
-            int userid = 0;
             Domain.User user1 = new Domain.User(username1, password1);
             Domain.User user2 = new Domain.User(username2, password2);
             test.AddUser(user1);
