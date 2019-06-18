@@ -38,7 +38,7 @@ namespace Data
             //reobtain the current team from the database to obtain its ID
             Data.Entities.Team DBteam = _db.Team.Where(a => a.Teamname.Equals(team.teamname)).FirstOrDefault();
 
-            for (int i = 0; i < DomainUser.Count(); i++)
+            for (int i = 0; i < DomainUser.Count; i++)
             {
                 //determine the ID for each individual user in the team
                 Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i])).FirstOrDefault();
@@ -57,12 +57,6 @@ namespace Data
                     _db.SaveChanges();
                 }
             }
-
-
-
-
-
-
 
             return success;
         }
