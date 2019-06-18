@@ -12,8 +12,6 @@ namespace Test
     [TestClass]
     public class TeamRepositoryTest
     {
-        Data.Entities.HLContext _db;
-        Data.TeamRepository test;
 
         [TestMethod]
         public void AddAndRemoveTeamTest()

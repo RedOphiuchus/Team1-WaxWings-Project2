@@ -8,11 +8,11 @@ namespace Domain
     public class Team
     {
 
-        public string teamname;
-        public List<Boolean> Roles;
-        public List<User> Userlist;
-        public List<int> rank;
-        public int? id;
+        public string teamname { get; set; }
+        public List<Boolean> Roles { get; set; }
+        public List<User> Userlist { get; set; }
+        public List<int> rank { get; set; }
+        public int? id { get; set; }
 
 
 
