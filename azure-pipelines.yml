@@ -54,8 +54,8 @@ steps:
     --logger trx
     --results-directory $(Build.ArtifactStagingDirectory)/test/
       /p:CollectCoverage=true
-      #/p:CoverletOutputFormat=opencover
       /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
+      #/p:CoverletOutputFormat=opencover
   workingDirectory: $(pathSolution)
   displayName: 'dotnet HeavensLadder'
 
