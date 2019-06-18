@@ -34,7 +34,7 @@ steps:
     projectName: 'Team1-WaxWings-Project2'
     extraProperties: |
       sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*"
-    #sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
+      sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
@@ -54,8 +54,8 @@ steps:
     --logger trx
     --results-directory $(Build.ArtifactStagingDirectory)/test/
       /p:CollectCoverage=true
-      #/p:CoverletOutputFormat=opencover
-      #/p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
+      /p:CoverletOutputFormat=opencover
+      /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
   workingDirectory: $(pathSolution)
   displayName: 'dotnet HeavensLadder'
 
