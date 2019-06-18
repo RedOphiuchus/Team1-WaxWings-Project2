@@ -32,10 +32,32 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '8d0d4c1bf69089cb09ba51ee237438c315b12da3'
     projectName: 'Team1-WaxWings-Project2'
+    extraProperties: |
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*"
+    #sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: $(pathSolution)
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'ConnectionString.txt'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'ConnectionString.txt'
+    TargetFolder: 'HeavensLadder/Data'
+
+- script: dotnet test --configuration $(buildConfiguration) --no-build
+    --logger trx
+    --results-directory $(Build.ArtifactStagingDirectory)/test/
+      /p:CollectCoverage=true
+      #/p:CoverletOutputFormat=opencover
+      #/p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
+  workingDirectory: $(pathSolution)
+  displayName: 'dotnet HeavensLadder'
 
 - task: SonarCloudAnalyze@1
 
@@ -43,9 +65,12 @@ steps:
   inputs:
     pollingTimeoutSec: '300'
 
-#- script: dotnet test --configuration $(buildConfiguration) --no-build
-#  workingDirectory: $(pathSolution)
-#  displayName: 'dotnet HeavensLadder'
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '*.trx'
+    searchFolder: '$(Build.ArtifactStagingDirectory)/test'
+  displayName: 'Publish test results '
 
 #- task: DotNetCoreCLI@2
 #  inputs:
