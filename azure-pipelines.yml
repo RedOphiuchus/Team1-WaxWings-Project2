@@ -48,9 +48,6 @@ steps:
     TargetFolder: 'HeavensLadder/Data'
 
 - script: dotnet test --configuration $(buildConfiguration) --no-build
-    --configuration $(buildConfiguration)
-    --logger trx
-    --no-build
     --results-directory $(Build.ArtifactStagingDirectory)/test/
       /p:CollectCoverage=true
       /p:CoverletOutputFormat=opencover
