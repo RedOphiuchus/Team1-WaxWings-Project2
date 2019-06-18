@@ -33,7 +33,7 @@ steps:
     projectKey: '8d0d4c1bf69089cb09ba51ee237438c315b12da3'
     projectName: 'Team1-WaxWings-Project2'
     extraProperties: |
-      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*"
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
       sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
 
 - script: dotnet build --configuration $(buildConfiguration)
