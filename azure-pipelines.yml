@@ -32,6 +32,9 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: '8d0d4c1bf69089cb09ba51ee237438c315b12da3'
     projectName: 'Team1-WaxWings-Project2'
+    extraProperties: |
+      sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
