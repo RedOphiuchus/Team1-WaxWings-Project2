@@ -1,4 +1,4 @@
-# ASP.NET Core
+ #ASP.NET Core
 
 # Build and test ASP.NET Core projects targeting .NET Core.
 # Add steps that run tests, create a NuGet package, deploy, and more:
@@ -39,15 +39,18 @@ steps:
 
 - task: SonarCloudAnalyze@1
 
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 #- script: dotnet test --configuration $(buildConfiguration) --no-build
 #  workingDirectory: $(pathSolution)
 #  displayName: 'dotnet HeavensLadder'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    projects: '$(projectPath)/*.csproj'
+#- task: DotNetCoreCLI@2
+#  inputs:
+#    command: 'publish'
+#    projects: '$(projectPath)/*.csproj'
 
 #- task: AzureRmWebAppDeployment@4
 #  inputs:
