@@ -37,15 +37,19 @@ steps:
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: $(pathSolution)
 
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'ConnectionString.txt'
+
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'Library/ConnectionString'
+    SourceFolder: '$(Agent.TempDirectory)'
     Contents: 'ConnectionString.txt'
     TargetFolder: 'HeavensLadder/Data'
 
-#- script: dotnet test --configuration $(buildConfiguration) --no-build
-#  workingDirectory: $(pathSolution)
-#  displayName: 'dotnet HeavensLadder'
+- script: dotnet test --configuration $(buildConfiguration) --no-build
+  workingDirectory: $(pathSolution)
+  displayName: 'dotnet HeavensLadder'
 
 - task: SonarCloudAnalyze@1
 
