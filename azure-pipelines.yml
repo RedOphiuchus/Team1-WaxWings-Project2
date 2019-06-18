@@ -39,7 +39,7 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    SourceFolder: 'ConnectionString'
+    SourceFolder: 'Library/ConnectionString'
     Contents: 'ConnectionString.txt'
     TargetFolder: 'HeavensLadder/Data'
 
