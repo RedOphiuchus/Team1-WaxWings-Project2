@@ -12,14 +12,14 @@ namespace Test
     [TestClass]
     public class TeamRepositoryTest
     {
-        Data.Entities.HLContext _db;
-        Data.TeamRepository test;
 
         [TestMethod]
         public void AddAndRemoveTeamTest()
         {
             Data.Entities.HLContext _db = new Data.Entities.HLContext();
             Data.TeamRepository test = new Data.TeamRepository(_db);
+            Data.UserRepository usertest = new Data.UserRepository(_db);
+
             bool success; //variable to determine if a team was added or removed successfully.
             Domain.Team x = new Domain.Team();
             x.teamname = "XXstarstrikersXX1113452435x4";
@@ -45,6 +45,48 @@ namespace Test
             _db.SaveChanges();
             Assert.AreEqual(success, false);
 
+            //assert that the propery userteam table was added to the database
+            Domain.User anewuser = new Domain.User("newuser89", "newpassword89");
+            //delete the user from DB incase it exist
+            success = usertest.DeleteUser(anewuser);
+            if(success)
+            {
+             usertest.Save();
+            }
+            //add the user to the DB
+            success = usertest.AddUser(anewuser);
+            if (success)
+            {
+                usertest.Save();
+            }
+
+            //pull the user from the database
+            Domain.User anewuserwithID = usertest.GetUserByUsername("newuser89");
+            //add the user to the team
+            x.AddMember(anewuserwithID);
+            //add the team to the DB
+            success = test.DeleteTeam(x);
+            _db.SaveChanges();
+            success = test.AddTeam(x);
+            _db.SaveChanges();
+
+            //now check that a usertable was created properly for the team
+            Data.Entities.UserTeam userteam = _db.UserTeam.Where(jj => jj.Userid == anewuserwithID.id).FirstOrDefault();
+
+            Assert.AreEqual(userteam.Userid, anewuserwithID.id);
+
+            //now remove the team from the db
+            success = test.DeleteTeam(x);
+
+            Data.Entities.UserTeam deleted = _db.UserTeam.Where(jj => jj.Userid == anewuserwithID.id).FirstOrDefault();
+            //check that the userteam was deleted
+            Assert.AreEqual(deleted, null);
+
+            //delete the user from the DB to keep it clean
+            usertest.DeleteUser(anewuserwithID);
+            usertest.Save();
+
+
         }
 
 
@@ -55,6 +97,40 @@ namespace Test
             Data.TeamRepository test = new Data.TeamRepository(_db);
             Data.UserRepository usertest = new Data.UserRepository(_db);
 
+            //preliminary stuff to clean database in case this stuff is already in there
+            //first see if the team used in this test is in the DB
+            Data.Entities.Team isthisteamhere = _db.Team.Where(o => o.Teamname.Equals("testteamname")).FirstOrDefault();
+            if(isthisteamhere !=null)
+            {
+                //obtain the primary key for this team
+                int primarykey = isthisteamhere.Id;
+                //remove the userteam(s) associated with this team
+                IEnumerable<UserTeam> ww = _db.UserTeam.Where(mm => mm.Teamid == primarykey);
+                foreach(var item in ww)
+                {
+                    _db.UserTeam.Remove(item);
+                }
+                _db.SaveChanges();
+                //now we can remove the team
+                _db.Team.Remove(isthisteamhere);
+                _db.SaveChanges();
+            }
+
+            //now we can remove our user1 and 2 if they exist
+            Data.Entities.User isthisuserhere = _db.User.Where(p => p.Username.Equals("username1")).FirstOrDefault();
+            if(isthisuserhere != null)
+            {
+                _db.User.Remove(isthisuserhere);
+                _db.SaveChanges();
+            }
+            Data.Entities.User isthisuserhere2 = _db.User.Where(p => p.Username.Equals("username2")).FirstOrDefault();
+            if (isthisuserhere2 != null)
+            {
+                _db.User.Remove(isthisuserhere2);
+                _db.SaveChanges();
+            }
+
+
 
             bool what; //random bool to hold data about success of methods.
             bool success; //initialize boolean for asserts
@@ -63,6 +139,7 @@ namespace Test
             success = test.UpdateTeam(team);
             Assert.AreEqual(success, false);
 
+            
 
             //second test case for we have an empty team in the database and it is updated to contain a team.
             team.teamname = "testteamname";
@@ -91,20 +168,52 @@ namespace Test
             what = test.DeleteTeam(team);
             what = test.AddTeam(team);
 
+            //now I will add another user to the team and see if it updates.
+            Domain.User user2 = new Domain.User("username2", "password2");
+            usertest.AddUser(user2);
+            usertest.Save();
+            var xx = _db.User.Where(a => a.Username.Equals(user2.username)).FirstOrDefault();
+            Domain.User user2withID = Mapper.Map(xx);
+            team.AddMember(user2withID);
+
             success = test.UpdateTeam(team);
             Assert.AreEqual(success, true);
-            //keep database clean and undo my add.
-            what = test.DeleteTeam(team);
+            //keep database clean and undo the things i put in it
+            //first remove the userteams
+            //preliminary stuff to clean database in case this stuff is already in there
+            //first see if the team used in this test is in the DB
+            Data.Entities.Team isthisteamhere3 = _db.Team.Where(o => o.Teamname.Equals("testteamname")).FirstOrDefault();
+            if (isthisteamhere3 != null)
+            {
+                //obtain the primary key for this team
+                int primarykey = isthisteamhere3.Id;
+                //remove the userteam(s) associated with this team
+                IEnumerable<UserTeam> ww = _db.UserTeam.Where(mm => mm.Teamid == primarykey);
+                foreach (var item in ww)
+                {
+                    _db.UserTeam.Remove(item);
+                }
+                _db.SaveChanges();
+                //now we can remove the team
+                _db.Team.Remove(isthisteamhere3);
+                _db.SaveChanges();
+            }
+
+            //now we can remove our user1 and 2 if they exist
+            Data.Entities.User isthisuserhere3 = _db.User.Where(p => p.Username.Equals("username1")).FirstOrDefault();
+            if (isthisuserhere3 != null)
+            {
+                _db.User.Remove(isthisuserhere3);
+                _db.SaveChanges();
+            }
+            Data.Entities.User isthisuserhere4 = _db.User.Where(p => p.Username.Equals("username2")).FirstOrDefault();
+            if (isthisuserhere4 != null)
+            {
+                _db.User.Remove(isthisuserhere4);
+                _db.SaveChanges();
+            }
 
 
-
-            //third test case for when we have a faulty team with more roles than users, it should fail
-            team.Roles.Add(false);
-            what = test.AddTeam(team);
-            success = test.UpdateTeam(team);
-            Assert.AreEqual(success, false);
-            //keep database clean by undoing the add
-            what = test.DeleteTeam(team);
         }
 
         [TestMethod]

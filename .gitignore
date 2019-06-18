@@ -1,5 +1,6 @@
 ConnectionString.txt
-
+bin/
+obj/
 *_i.c
 *_p.c
 *.ilk

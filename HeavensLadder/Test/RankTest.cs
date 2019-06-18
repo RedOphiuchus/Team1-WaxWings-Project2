@@ -52,6 +52,6 @@ namespace Test
             Assert.AreEqual(rank.losses, 0);
             rank.AddLoss();
             Assert.AreEqual(rank.losses, 1);
-        }        
+        }
     }
 }

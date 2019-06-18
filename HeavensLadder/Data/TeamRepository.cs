@@ -29,6 +29,41 @@ namespace Data
                 _db.SaveChanges();
                 success = true;
             }
+            //now, we need to add its userteams
+            //now, I want to add the elements from this team into the userteam table
+
+            List<User> DomainUser = team.Userlist;
+            List<bool> DomainRole = team.Roles;
+
+            //reobtain the current team from the database to obtain its ID
+            Data.Entities.Team DBteam = _db.Team.Where(a => a.Teamname.Equals(team.teamname)).FirstOrDefault();
+
+            for (int i = 0; i < DomainUser.Count(); i++)
+            {
+                //determine the ID for each individual user in the team
+                Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i])).FirstOrDefault();
+                if (DBUser == null)
+                {
+                    //if the user didnt exist, we do not add any userteams
+                }
+                else
+                {
+                    //here we add each user into the userteam table
+                    Data.Entities.UserTeam userteam = new Data.Entities.UserTeam();
+                    userteam.Teamid = DBteam.Id;
+                    userteam.Leader = DomainRole[i];
+                    userteam.Userid = DBUser.Id;
+                    _db.UserTeam.Add(userteam);
+                    _db.SaveChanges();
+                }
+            }
+
+
+
+
+
+
+
             return success;
         }
 
@@ -55,7 +90,6 @@ namespace Data
             }
             if (x != null)
             {
-                int id = x.Id;
                 _db.Team.Remove(x);
                 _db.SaveChanges();
                 //set boolean to true to indicate that we successfully added a team
@@ -71,25 +105,28 @@ namespace Data
             Data.Entities.Team DBTeam = _db.Team.Where(z => z.Teamname.Equals(team.teamname)).FirstOrDefault();
 
             //ensure that our DBteam is not null, we have an equal number of roles and users, and that we have more than 0 roles
-            if (DBTeam != null && team.Roles.Count()==team.Userlist.Count() && team.Roles.Count()>0)
+            if (DBTeam != null && team.Roles.Count==team.Userlist.Count && team.Roles.Count>0)
             {
                 int DBTeamID = DBTeam.Id;
                 //next, determine the elements in the USERTEAM table that have that teams ID
-                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(p => p.Id == DBTeamID).ToList();
+                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(p => p.Teamid == DBTeamID).ToList();
                 //now, remove those elements from the userteam table
-                foreach (var item in DBUserTeam)
+                if (DBUserTeam.Count > 0)
                 {
-                    _db.UserTeam.Remove(item);
+                    foreach (var item in DBUserTeam)
+                    {
+                        _db.UserTeam.Remove(item);
+                    }
                 }
                 //now, I want to add the elements from this team into the userteam table
 
                 List<User> DomainUser = team.Userlist;
                 List<bool> DomainRole = team.Roles;
 
-                for(i=0; i>DomainUser.Count(); i++)
+                for(i=0; i<DomainUser.Count; i++)
                 {
                     //determine the ID for each individual user in the team
-                    Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i])).FirstOrDefault();
+                    Data.Entities.User DBUser = _db.User.Where(z => z.Username.Equals(DomainUser[i].username)).FirstOrDefault();
                     if (DBUser == null)
                     {
                         //if the user didnt exist, we want to stop the program and return false
@@ -134,7 +171,7 @@ namespace Data
                 //now, loop through the UserTeam table and obtain all of the teamIDs
                 if(DBUserTeam != null)
                 {
-                    for (i = 0; i < DBUserTeam.Count(); i++)
+                    for (i = 0; i < DBUserTeam.Count; i++)
                         teamIDs.Add(DBUserTeam[i].Teamid);
 
                 }
@@ -142,7 +179,7 @@ namespace Data
 
             //now we have a list of the Team IDs, so we can go ahead and try to construct the teams using it
             //first lets make a loop
-            for (i = 0; i<teamIDs.Count(); i++)
+            for (i = 0; i<teamIDs.Count; i++)
             {
                 //step1, create a team object
                 Team team = new Team(); //i dont know if naming them all the same thing will cause an issue
@@ -157,7 +194,7 @@ namespace Data
                 List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamIDs[i]).ToList();
 
                 //step 4, now i gotta loop through the list of userTeams to get some datas for my team
-                for(i = 0; i>deUserTeam.Count(); i++)
+                for(i = 0; i>deUserTeam.Count; i++)
                 {
                     //now I want to add the user and the role, role is easy
                     team.Roles.Add(deUserTeam[i].Leader);
@@ -183,7 +220,7 @@ namespace Data
         public Team GetByTeamName(string name)
         {
             Team something = new Team(); //initialize team object!
-                                         //Data.Entities.Team team = _db.Team.Where(g => g.Teamname.Equals(name)).Include("Userteam.Leader").FirstOrDefault();
+                                         
             int i = 0;//index variable for loops                             
             //get team id from the name
             Data.Entities.Team deteam = _db.Team.Where(h => h.Teamname.Equals(name)).FirstOrDefault();
@@ -192,7 +229,7 @@ namespace Data
             List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamID).ToList();
 
             //step 4, now i gotta loop through the list of userTeams to get some datas for my team
-            for (i = 0; i < deUserTeam.Count(); i++)
+            for (i = 0; i < deUserTeam.Count; i++)
             {
                 //now I want to add the user and the role, role is easy
                 something.Roles.Add(deUserTeam[i].Leader);

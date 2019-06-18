@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain;
 using Data.Entities;
+using System.Linq;
 
 namespace Test
 {
@@ -34,9 +35,7 @@ namespace Test
             team1.Teamname = "testteam";
             int gamemode = 1;
             Data.Entities.Rank datrank = new Data.Entities.Rank();
-            Data.Entities.GameModes deGame = new Data.Entities.GameModes();
-            deGame.Id = gamemode;
-            datrank.Gamemode = deGame;
+            datrank.Gamemodeid = gamemode;
             datrank.Team = team1;
 
             Domain.Rank domrank = Data.Mapper.Map(datrank);
@@ -60,11 +59,16 @@ namespace Test
             Domain.Team newteam = teamrepo.GetByTeamName("testteam123");
             Domain.Rank rank = new Domain.Rank(newteam, gameid);
 
+            //still working on this part
+           // Rank testrank = _db.Rank.Where(x => x.)
+
+            test.DeleteRank(rank);
             bool exists = test.AlreadyExists(rank);
             // should not already exist, since it was never added to the database            
             Assert.AreEqual(exists, false);
 
-            teamrepo.DeleteTeam(team);
+            //changed team to newteam so it matches the code
+            teamrepo.DeleteTeam(newteam);
             _db.SaveChanges();
         }
 
@@ -90,29 +94,84 @@ namespace Test
             test.Save();
             Assert.AreEqual(repeateadd, false);
 
-            bool delete = test.DeleteRank(rank);
+            Domain.Rank removeRank = test.GetRank("testteam123", 1);
+            Assert.IsNotNull(removeRank);
+
+            bool delete = test.DeleteRank(removeRank);
             test.Save();
             Assert.AreEqual(delete, true);
-            bool repeatdelete = test.DeleteRank(rank);
+            bool repeatdelete = test.DeleteRank(removeRank);
             test.Save();
             Assert.AreEqual(repeatdelete, false);
 
-            teamrepo.DeleteTeam(team);
+            teamrepo.DeleteTeam(newteam);
             _db.SaveChanges();
         }
-        /*
+        
         [TestMethod]
         public void TestInitializeRanks()
         {
             _db = new Data.Entities.HLContext();
             test = new Data.RankRepository(_db);
+            Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
             Domain.Team team = new Domain.Team();
             team.teamname = "testteam";
+            teamrepo.AddTeam(team);
+            _db.SaveChanges();
 
-            bool initialized = test.InitializeRanks(team);
+            Domain.Team newteam = teamrepo.GetByTeamName("testteam");
+
+            bool initialized = test.InitializeRanks(newteam);
             Assert.AreEqual(initialized, true);
-            bool repeateinit = test.InitializeRanks(team);
+            bool repeateinit = test.InitializeRanks(newteam);
             Assert.AreEqual(repeateinit, false);
-        }*/
+
+            var ranklist = test.GetRanksByTeam("testteam");
+            foreach (var rank in ranklist)
+            {
+                test.DeleteRank(rank);
+            }
+
+            teamrepo.DeleteTeam(newteam);
+            _db.SaveChanges();
+        }
+
+        [TestMethod]
+        public void TestUpdateRank()
+        {
+            _db = new Data.Entities.HLContext();
+            test = new Data.RankRepository(_db);
+            Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
+            Domain.Team team = new Domain.Team();
+            team.teamname = "testteam";
+            teamrepo.AddTeam(team);
+            _db.SaveChanges();
+
+            int gameid = 1;
+            Domain.Team newteam = teamrepo.GetByTeamName("testteam");
+            Domain.Rank rank = new Domain.Rank(newteam, gameid);
+            Domain.Rank rank2 = new Domain.Rank(newteam, 2);
+
+            test.AddRank(rank);
+            test.Save();
+
+            bool updatenotexist = test.UpdateRank(rank2);
+            //should be false, because rank is not in database so cannot be updated
+            Assert.AreEqual(false, updatenotexist);
+
+            var newrank = test.GetRank("testteam", 1);
+            bool update = test.UpdateRank(newrank);
+            Assert.AreEqual(true, update);
+
+            
+            newrank.AddWin();
+            test.UpdateRank(newrank);
+            var uprank = test.GetRank("testteam", 1);
+            Assert.AreEqual(uprank.wins, 1);
+
+            test.DeleteRank(newrank);
+            teamrepo.DeleteTeam(newteam);
+            _db.SaveChanges();
+        }
     }
 }
