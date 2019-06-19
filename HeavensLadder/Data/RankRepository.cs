@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
@@ -57,7 +58,7 @@ namespace Data
         {
             List<Rank> ranklist = new List<Rank>();
             //changed this part to return all ranks in the db.
-            var elems = _db.Rank.Where(x => x.Id >= 0).ToList();
+            var elems = _db.Rank.Where(x => x.Id >= 0).Include("Team").ToList();
             foreach (var elem in elems)
             {
                 ranklist.Add(Mapper.Map(elem));
