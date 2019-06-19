@@ -39,15 +39,20 @@ namespace WebAPI.Controllers
         public ActionResult<bool> Register(string username, string password)
         {
             bool validated = _UserRepository.validateusername(username);
+            bool success = false;
             if (validated == false)
             {
                 Domain.User user1 = new Domain.User(username,password);
 
                 _UserRepository.AddUser(user1);
                 _UserRepository.Save();
+                if (_UserRepository.validateusername(username) == true)
+                {
+                    success = true;
+                }
             }
 
-            return _UserRepository.validateusername(username);
+            return success;
         }
 
         /*

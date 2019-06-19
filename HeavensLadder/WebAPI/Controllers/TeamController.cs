@@ -10,7 +10,7 @@ using Data;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/TeamController")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TeamController : ControllerBase
     {
@@ -23,11 +23,12 @@ namespace WebAPI.Controllers
         }
 
         // GET boolean for login
-        [HttpPost("Add/{teamname}/{username}")]
+        [HttpPost("Create/{teamname}/{username}")]
         public ActionResult<bool> CreateTeam(string teamname,string username)
         {
             var user1 = _UserRepository.GetUserByUsername(username);
             Domain.Team team1 = new Domain.Team(user1);
+            team1.teamname = teamname;
             bool validated = _TeamRepository.AddTeam(team1);
             bool success = false;
             if (validated == true)
@@ -41,7 +42,7 @@ namespace WebAPI.Controllers
 
         // GET boolean for login
         [HttpPut("Add/{teamname}/{username}/{role}")]
-        public ActionResult<bool> AddMember(string teamname, string username, int role)
+        public ActionResult<bool> UpdateTeam(string teamname, string username, int role)
         {
             var user1fromdb = _UserRepository.GetUserByUsername(username);
             var team1fromdb = _TeamRepository.GetByTeamName(teamname);
