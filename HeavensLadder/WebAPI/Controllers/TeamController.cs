@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         // GET boolean for login
-        [HttpPut("Add/{teamname}/{username}")]
+        [HttpPut("Add")]
         public ActionResult<bool> UpdateTeam(string teamname, string username)
         {
             var user1fromdb = _UserRepository.GetUserByUsername(username);

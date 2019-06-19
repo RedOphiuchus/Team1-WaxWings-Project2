@@ -28,18 +28,13 @@ namespace WebAPI.Controllers
         }
 
         // GET: api/world/Rank returns all ranks in the world by gamemode
-        [HttpGet("world/rank/{gamemode}")]
+        [HttpGet("world/{gamemode}")]
         public IEnumerable<Rank> Get(int gamemode)
         {
             return _RankRepository.GetRanksByMode(gamemode);
         }
 
-        // PUT: updates rank upon trigger
-        [HttpPut]
-        public void Put(Rank rank)
-        {
-            _RankRepository.UpdateRank(rank);
-        }
+        
 
         // POST: api/Rank
         [HttpPost]
