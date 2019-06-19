@@ -46,6 +46,8 @@ namespace Data
         public Challenge GetChallengeById(int id)
         {
             Data.Entities.Challenge cha = _db.Challenge.Where(c => c.Id == id).Include("Sides.Team").FirstOrDefault();
+            if (cha == null)
+                return null;
             Domain.Challenge outCha = Mapper.Map(cha);
             return outCha;
         }

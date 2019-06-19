@@ -101,6 +101,42 @@ namespace Test
         }
 
         [TestMethod]
+        public void GetChallengeByIdTest()
+        {
+            //Arrange
+            Data.Entities.HLContext _db = new Data.Entities.HLContext();
+            ChallengeRepository ChRepo = new ChallengeRepository(_db);
+            TeamRepository TRepo = new TeamRepository(_db);
+            Challenge outCha;
+            Challenge badCha;
+            Team team1 = new Team();
+            team1.teamname = "Test1";
+            TRepo.AddTeam(team1);
+            Team Test1 = TRepo.GetByTeamName(team1.teamname);
+
+            Team team2 = new Team();
+            team2.teamname = "Test2";
+            TRepo.AddTeam(team2);
+            Team Test2 = TRepo.GetByTeamName(team2.teamname);
+
+
+            Challenge cha1 = new Challenge(Test1, Test2, 1);
+
+            ChRepo.AddChallenge(cha1);
+            int id = (int)ChRepo.GetTeamChallenges(Test1.teamname).FirstOrDefault().id;
+            //Act
+
+            outCha = ChRepo.GetChallengeById(id);
+            badCha = ChRepo.GetChallengeById(-1);
+
+            ChRepo.DeleteChallenge(outCha);
+
+            //Assert
+            Assert.IsNotNull(outCha);
+            Assert.IsNull(badCha);
+        }
+
+        [TestMethod]
         public void UpdateChallengeTest()
         {
             //Arrange
