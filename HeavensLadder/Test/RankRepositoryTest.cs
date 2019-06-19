@@ -173,5 +173,45 @@ namespace Test
             teamrepo.DeleteTeam(newteam);
             _db.SaveChanges();
         }
+
+        [TestMethod]
+        public void TestGetRanksByMode()
+        {
+            _db = new Data.Entities.HLContext();
+            test = new Data.RankRepository(_db);
+            Data.TeamRepository teamrepo = new Data.TeamRepository(_db);
+            Domain.Team team1 = new Domain.Team();
+            Domain.Team team2 = new Domain.Team();
+            team1.teamname = "team1";
+            team2.teamname = "team2";
+            teamrepo.AddTeam(team1);
+            teamrepo.AddTeam(team2);
+            _db.SaveChanges();
+
+            Domain.Team newteam1 = teamrepo.GetByTeamName("team1");
+            Domain.Team newteam2 = teamrepo.GetByTeamName("team2");
+
+            test.InitializeRanks(newteam1);
+            test.InitializeRanks(newteam2);
+
+            var rankmodelist = test.GetRanksByMode(1);
+            //Check that two ranks are returned (one for each of the two teams)
+            Assert.AreEqual(2, rankmodelist.Count);       
+
+            var ranklist = test.GetRanksByTeam("team1");
+            foreach (var rank in ranklist)
+            {
+                test.DeleteRank(rank);
+            }
+            ranklist = test.GetRanksByTeam("team2");
+            foreach (var rank in ranklist)
+            {
+                test.DeleteRank(rank);
+            }
+
+            teamrepo.DeleteTeam(newteam1);
+            teamrepo.DeleteTeam(newteam2);
+            _db.SaveChanges();
+        }
     }
 }
