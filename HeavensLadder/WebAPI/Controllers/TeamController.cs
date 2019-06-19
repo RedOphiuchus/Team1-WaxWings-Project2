@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Domain;
+using Data;
 
 namespace WebAPI.Controllers
 {
@@ -11,39 +14,93 @@ namespace WebAPI.Controllers
     [ApiController]
     public class TeamController : ControllerBase
     {
-      /*  // GET: api/Team
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ITeamRepository _TeamRepository;
+        private readonly IUserRepository _UserRepository;
+        public TeamController(ITeamRepository TeamRepository, IUserRepository UserRepository)
         {
-            return new string[] { "value1", "value2" };
+            _TeamRepository = TeamRepository;
+            _UserRepository = UserRepository;
         }
 
-        // GET: api/Team/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET boolean for login
+        [HttpPost("Add/{teamname}/{username}")]
+        public ActionResult<bool> CreateTeam(string teamname,string username)
         {
-            return "value";
+            var user1 = _UserRepository.GetUserByUsername(username);
+            Domain.Team team1 = new Domain.Team(user1);
+            bool validated = _TeamRepository.AddTeam(team1);
+            bool success = false;
+            if (validated == true)
+            {
+                success = true;
+            }
+            
+
+            return success;
         }
 
-        // POST: api/Team
-        [HttpPost]
-        public void Post([FromBody] string value)
+        // GET boolean for login
+        [HttpPut("Add/{teamname}/{username}/{role}")]
+        public ActionResult<bool> AddMember(string teamname, string username, int role)
         {
+            var user1fromdb = _UserRepository.GetUserByUsername(username);
+            var team1fromdb = _TeamRepository.GetByTeamName(teamname);
+            bool validated = team1fromdb.AddMember(user1fromdb);
+            bool success = false;
+            if (validated == true)
+            {
+                var validated2 = _TeamRepository.UpdateTeam(team1fromdb);
+                if (validated2 == true)
+                {
+                    success = true;
+                }
+            }
+            return success;
         }
 
-        // PUT: api/Team/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // GET boolean for login
+        [HttpGet("Add/{teamname}")]
+        public ActionResult<List<Domain.User>> UsersInTeam(string teamname)
         {
+            List<Domain.User> UserList = _UserRepository.TeamUsers(teamname);
+
+            return UserList;
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
 
-    */
+        /*  // GET: api/Team
+          [HttpGet]
+          public IEnumerable<string> Get()
+          {
+              return new string[] { "value1", "value2" };
+          }
+
+          // GET: api/Team/5
+          [HttpGet("{id}", Name = "Get")]
+          public string Get(int id)
+          {
+              return "value";
+          }
+
+          // POST: api/Team
+          [HttpPost]
+          public void Post([FromBody] string value)
+          {
+          }
+
+          // PUT: api/Team/5
+          [HttpPut("{id}")]
+          public void Put(int id, [FromBody] string value)
+          {
+          }
+
+          // DELETE: api/ApiWithActions/5
+          [HttpDelete("{id}")]
+          public void Delete(int id)
+          {
+          }
+
+      */
     }
 
     
