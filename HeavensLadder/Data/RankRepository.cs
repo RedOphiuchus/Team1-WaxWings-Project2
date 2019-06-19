@@ -75,10 +75,7 @@ namespace Data
                     rank = r;
             }
 
-            if (rank != null)
-                return rank;
-            else
-                return null;
+            return rank;
         }
 
         public List<Rank> GetRanksByMode(int gamemode)
