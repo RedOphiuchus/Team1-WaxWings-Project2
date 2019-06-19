@@ -8,17 +8,49 @@ using Domain;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/RankController")]
+    [Route("api/[Controller]")]
     [ApiController]
     public class RankController : ControllerBase
     {
-        /*
-        // GET: api/Rank
-        [HttpGet]
-        public IEnumerable<string> Get()
+        //intialize repository objects so that we can use the repository methods
+        private readonly IRankRepository _RankRepository;
+        public RankController(IRankRepository RankRepository)
         {
-            return new string[] { "value1", "value2" };
+            _RankRepository = RankRepository;
         }
+
+        // GET: api/Rank returns all ranks for a given team
+        [HttpGet("{teamname}")]
+        public IEnumerable<Rank> Get(string teamname)
+        {
+            return _RankRepository.GetRanksByTeam(teamname);
+            
+        }
+
+        // GET: api/world/Rank returns all ranks in the world by gamemode
+        [HttpGet("world/rank/{gamemode}")]
+        public IEnumerable<Rank> Get(int gamemode)
+        {
+            return _RankRepository.GetRanksByMode(gamemode);
+        }
+
+        // PUT: updates rank upon trigger
+        [HttpPut]
+        public void Put(Rank rank)
+        {
+            _RankRepository.UpdateRank(rank);
+        }
+
+        // POST: api/Rank
+        [HttpPost]
+        public void Post(Rank rank)
+        {
+            _RankRepository.AddRank(rank);
+        }
+
+
+
+        /*
 
         // GET: api/Rank/5
         [HttpGet("{id}", Name = "Get")]

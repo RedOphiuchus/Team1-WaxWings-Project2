@@ -42,6 +42,9 @@ namespace todoapivstemplate
                     };
                 }); */
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRankRepository, RankRepository>();
+            services.AddScoped<IChallengeRepository, ChallengeRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddDbContext<HLContext>(options => options.UseSqlServer("Server=sera-server.database.windows.net; Database=HeavensLadder; user id=redophiuchus; Password=Password1;"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

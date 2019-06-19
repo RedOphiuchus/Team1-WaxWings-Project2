@@ -2,15 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/ChallengeController")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ChallengeController : ControllerBase
     {
+        private readonly IChallengeRepository _ChallengeRepository;
+        public ChallengeController(IChallengeRepository ChallengeRepository)
+        {
+            _ChallengeRepository = ChallengeRepository;
+        }
+
+        // GET: api/Challenge
+        [HttpGet("{teamname}")]
+        public IEnumerable<Challenge> Get(string teamname)
+        {
+            var temp = _ChallengeRepository.GetTeamChallenges(teamname);
+            return temp;
+        }
+
+        // POST: api/Challenge
+        [HttpPost]
+        public void Post(Challenge challenge)
+        {
+            _ChallengeRepository.AddChallenge(challenge);
+        }
+
+        // PUT: api/Challenge/5
+        [HttpPut]
+        public void Put(Challenge challenge)
+        {
+            _ChallengeRepository.UpdateChallenge(challenge);
+        }
+
+
         /*
         // GET: api/Challenge
         [HttpGet]
