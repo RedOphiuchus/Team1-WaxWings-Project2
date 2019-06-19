@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
             _UserRepository = UserRepository;
         }
 
-        // GET boolean for login
+        // GET boolean for creating a team
         [HttpPost("Create/{teamname}/{username}")]
         public ActionResult<bool> CreateTeam(string teamname,string username)
         {
@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
             return success;
         }
 
-        // GET boolean for login
+        // GET boolean for updating a team
         [HttpPut("Add/{teamname}/{username}")]
         public ActionResult<bool> UpdateTeam(string teamname, string username)
         {
@@ -59,49 +59,23 @@ namespace WebAPI.Controllers
             return success;
         }
 
-        // GET boolean for login
+        // GET list of strings of users in a team
         [HttpGet("Add/{teamname}")]
-        public ActionResult<List<Domain.User>> UsersInTeam(string teamname)
+        public ActionResult<List<string>> UsersInTeam(string teamname)
         {
-            List<Domain.User> UserList = _UserRepository.TeamUsers(teamname);
+            List<string> UserNameList = new List<string>();
+            List<Domain.User> UsersList = _UserRepository.TeamUsers(teamname);
 
-            return UserList;
+            if (UsersList != null)
+            {
+                foreach (var UserList in UsersList)
+                {
+                    UserNameList.Add(UserList.username);
+                }
+            }
+            return UserNameList;
         }
 
-
-        /*  // GET: api/Team
-          [HttpGet]
-          public IEnumerable<string> Get()
-          {
-              return new string[] { "value1", "value2" };
-          }
-
-          // GET: api/Team/5
-          [HttpGet("{id}", Name = "Get")]
-          public string Get(int id)
-          {
-              return "value";
-          }
-
-          // POST: api/Team
-          [HttpPost]
-          public void Post([FromBody] string value)
-          {
-          }
-
-          // PUT: api/Team/5
-          [HttpPut("{id}")]
-          public void Put(int id, [FromBody] string value)
-          {
-          }
-
-          // DELETE: api/ApiWithActions/5
-          [HttpDelete("{id}")]
-          public void Delete(int id)
-          {
-          }
-
-      */
     }
 
     

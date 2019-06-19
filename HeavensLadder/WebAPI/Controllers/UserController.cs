@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
             _UserRepository = UserRepository;
         }
 
-        // GET boolean for username
+        // GET boolean for validating username
         [HttpGet("{username}")]
         public ActionResult<bool> ValidateUsername(string username)
         {
@@ -34,7 +34,7 @@ namespace WebAPI.Controllers
             return _UserRepository.validatelogin(username,password);
         }
 
-        // GET boolean for login
+        // GET boolean for register
         [HttpPost("Register/{username}/{password}")]
         public ActionResult<bool> Register(string username, string password)
         {
@@ -53,39 +53,6 @@ namespace WebAPI.Controllers
             }
 
             return success;
-        }
-
-        /*
-        // GET: api/User
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        */
-        // POST: api/User
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/User/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
