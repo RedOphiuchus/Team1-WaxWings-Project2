@@ -21,58 +21,30 @@ namespace WebAPI.Controllers
 
         // GET: api/Rank returns all ranks for a given team
         [HttpGet("{teamname}")]
-        public IEnumerable<Rank> Get(string teamname)
+        public IActionResult Get(string teamname)
         {
-            return _RankRepository.GetRanksByTeam(teamname);
+            var ranks = _RankRepository.GetRanksByTeam(teamname);
+            if(ranks.Count == 0)
+            {
+                return BadRequest(new { message = "Team does not exist." });
+            }
+
+            return Ok(ranks);
             
         }
 
         // GET: api/world/Rank returns all ranks in the world by gamemode
         [HttpGet("world/{gamemode}")]
-        public IEnumerable<Rank> Get(int gamemode)
+        public IActionResult Get(int gamemode)
         {
-            return _RankRepository.GetRanksByMode(gamemode);
+            var ranks = _RankRepository.GetRanksByMode(gamemode);
+            if (ranks.Count == 0)
+            {
+                return BadRequest(new { message = "No ranks exist yet." });
+            }
+
+            return Ok(ranks);
         }
-
-        
-
-        // POST: api/Rank
-        [HttpPost]
-        public void Post(Rank rank)
-        {
-            _RankRepository.AddRank(rank);
-        }
-
-
-
-        /*
-
-        // GET: api/Rank/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Rank
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT: api/Rank/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
-    */
     }
     
 }
