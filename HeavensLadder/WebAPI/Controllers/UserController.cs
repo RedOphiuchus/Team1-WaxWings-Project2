@@ -21,38 +21,40 @@ namespace WebAPI.Controllers
         }
 
         // GET boolean for validating username
-        [HttpGet("{username}")]
-        public ActionResult<bool> ValidateUsername(string username)
-        {
-            return _UserRepository.validateusername(username);
-        }
+        //[HttpGet("{username}")]
+        //public ActionResult<bool> ValidateUsername(string username)
+        //{
+        //    return _UserRepository.validateusername(username);
+        //}
 
-        // GET boolean for login
-        [HttpGet("{username}/{password}")]
-        public ActionResult<bool> ValidateLogin(string username,string password)
+        // POST boolean for login
+        [HttpPost("Login")]
+        //public IActionResult Login([FromBody] Domain.User user)
+        public IActionResult Login([FromBody] Domain.User user)
         {
-            return _UserRepository.validatelogin(username,password);
+            bool success = _UserRepository.validatelogin(user.username,user.password);
+            if(success)
+            {
+                Domain.User realUser = _UserRepository.GetUserByUsername(user.username);
+                return Ok(new { user = realUser.id });
+            }
+            return Unauthorized(new { message = "Username doesn't exist or password is incorrect." });
         }
 
         // GET boolean for register
-        [HttpPost("Register/{username}/{password}")]
-        public ActionResult<bool> Register(string username, string password)
+        [HttpPost("Register/")]
+        public IActionResult Register([FromBody] Domain.User user)
         {
-            bool validated = _UserRepository.validateusername(username);
-            bool success = false;
-            if (validated == false)
-            {
-                Domain.User user1 = new Domain.User(username,password);
+            bool validated = _UserRepository.validateusername(user.username);
+            if (validated == true)
+                return BadRequest(new { message = "Username already exists." });
 
-                _UserRepository.AddUser(user1);
-                _UserRepository.Save();
-                if (_UserRepository.validateusername(username) == true)
-                {
-                    success = true;
-                }
-            }
+            _UserRepository.AddUser(user);
+            _UserRepository.Save();
+            if (_UserRepository.validateusername(user.username) == false)
+                return StatusCode(500);
 
-            return success;
+            return Created("api/User/Register", _UserRepository.GetUserByUsername(user.username).id);
         }
     }
 }
