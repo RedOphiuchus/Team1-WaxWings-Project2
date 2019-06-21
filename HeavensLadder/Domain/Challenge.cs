@@ -52,14 +52,14 @@ namespace Domain
             return null;
         }
 
-        public bool MakeReport(Team team, bool result)
+        public bool MakeReport(string teamname, bool result)
         {
-            if(team == Team1)
+            if(teamname == Team1.teamname)
             {
                 Team1Report = result;
                 return true;
             }
-            if(team == Team2)
+            if(teamname == Team2.teamname)
             {
                 Team2Report = result;
                 return true;
