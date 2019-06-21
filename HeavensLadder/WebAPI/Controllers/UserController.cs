@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
         public IActionResult Register([FromBody] Domain.User user)
         {
             bool validated = _UserRepository.validateusername(user.username);
-            if (validated == true)
+            if (validated)
                 return BadRequest(new { message = "Username already exists." });
 
             _UserRepository.AddUser(user);

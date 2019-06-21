@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Domain;
 using Data;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -16,64 +17,146 @@ namespace WebAPI.Controllers
     {
         private readonly ITeamRepository _TeamRepository;
         private readonly IUserRepository _UserRepository;
-        public TeamController(ITeamRepository TeamRepository, IUserRepository UserRepository)
+        private readonly IRankRepository _RankRepository;
+        public TeamController(ITeamRepository TeamRepository, IUserRepository UserRepository, IRankRepository RankRepository)
         {
             _TeamRepository = TeamRepository;
             _UserRepository = UserRepository;
+            _RankRepository = RankRepository;
         }
 
         // GET boolean for creating a team
-        [HttpPost("Create/{teamname}/{username}")]
-        public ActionResult<bool> CreateTeam(string teamname,string username)
+        [HttpPost("Create")]
+        public IActionResult CreateTeam([FromBody] Models.TeamInputModel team)
         {
-            var user1 = _UserRepository.GetUserByUsername(username);
-            Domain.Team team1 = new Domain.Team(user1);
-            team1.teamname = teamname;
-            bool validated = _TeamRepository.AddTeam(team1);
-            bool success = false;
-            if (validated == true)
-            {
-                success = true;
-            }
-            
+            string outMessage = "";
 
-            return success;
+            if(ValidateTeamInput(team, out outMessage) == false)
+            {
+                return BadRequest(new { message = outMessage });
+            }
+
+            var user1 = _UserRepository.GetUserByUsername(team.username);
+            if (user1 == null)
+                return BadRequest(new { message = "User does not exist." });
+
+            Domain.Team team1 = new Domain.Team(user1);
+            team1.teamname = team.teamname;
+            bool validated = _TeamRepository.AddTeam(team1);
+            if (!validated)
+                return StatusCode(500);
+
+            Domain.Team madeTeam = _TeamRepository.GetByTeamName(team1.teamname); 
+            bool ranksMade = false;
+            ranksMade = _RankRepository.InitializeRanks(madeTeam);
+            if(!ranksMade)
+            {
+                _TeamRepository.DeleteTeam(madeTeam);
+                return StatusCode(500);
+            }
+
+            return Created("app/team/create", team1);
         }
 
-        // GET boolean for updating a team
-        [HttpPut("Add/{teamname}/{username}")]
-        public ActionResult<bool> UpdateTeam(string teamname, string username)
+        private bool ValidateTeamInput(TeamInputModel team, out string message)
         {
-            var user1fromdb = _UserRepository.GetUserByUsername(username);
-            var team1fromdb = _TeamRepository.GetByTeamName(teamname);
-            bool validated = team1fromdb.AddMember(user1fromdb);
-            bool success = false;
-            if (validated == true)
+            if (team.username == null && team.teamname == null)
             {
-                var validated2 = _TeamRepository.UpdateTeam(team1fromdb);
-                if (validated2 == true)
-                {
-                    success = true;
-                }
+                message = "Invalid input: missing teamname and username.";
+                return false;
             }
-            return success;
+            if (team.teamname == null)
+            {
+                message = "Invalid input: missing teamname.";
+                return false;
+            }
+            if (team.username == null)
+            {
+                message = "Invalid input: missing username.";
+                return false;
+            }
+            message = "";
+            return true;
+        }
+
+
+        // GET boolean for updating a team
+        [HttpPut("Add")]
+        public IActionResult UpdateTeam([FromBody] Models.TeamInputModel team)
+        {
+            string outMessage = "";
+
+            if (ValidateTeamInput(team, out outMessage) == false)
+            {
+                return BadRequest(new { message = outMessage });
+            }
+
+            var user1 = _UserRepository.GetUserByUsername(team.username);
+            if (user1 == null)
+                return BadRequest(new { message = "User does not exist." });
+
+            var team1fromdb = _TeamRepository.GetByTeamName(team.teamname);
+            if (team1fromdb == null)
+                return BadRequest(new { message = "Team does not exist." });
+
+            bool validated = team1fromdb.AddMember(user1);
+            if (!validated)
+                return StatusCode(500);
+            var validated2 = _TeamRepository.UpdateTeam(team1fromdb);
+            if (!validated2)
+            {
+                return StatusCode(500);
+            }
+            return Ok();
         }
 
         // GET list of strings of users in a team
-        [HttpGet("Add/{teamname}")]
-        public ActionResult<List<string>> UsersInTeam(string teamname)
+        [HttpGet("Users")]
+        public IActionResult UsersInTeam(string teamname)
         {
             List<string> UserNameList = new List<string>();
             List<Domain.User> UsersList = _UserRepository.TeamUsers(teamname);
 
-            if (UsersList != null)
+            if (UsersList.Count == 0)
+                return BadRequest(new { message = "Team does not exist." });
+            foreach (var UserList in UsersList)
             {
-                foreach (var UserList in UsersList)
+                UserNameList.Add(UserList.username);
+            }
+            
+            return Ok(UserNameList);
+        }
+
+        [HttpPut("SetLead")]
+        public IActionResult ChangeLeader([FromBody] Models.TeamInputModel team)
+        {
+            string outMessage = "";
+
+            if (ValidateTeamInput(team, out outMessage) == false)
+            {
+                return BadRequest(new { message = outMessage });
+            }
+            Domain.Team pullTeam = _TeamRepository.GetByTeamName(team.teamname);
+            bool hasLeader = false;
+            for (int i = 0; i < pullTeam.Roles.Count; i++)
+            {
+                pullTeam.Roles[i] = false;
+                if (pullTeam.Userlist[i].username == team.username)
                 {
-                    UserNameList.Add(UserList.username);
+                    pullTeam.Roles[i] = true;
+                    hasLeader = true;
                 }
             }
-            return UserNameList;
+
+            if (!hasLeader)
+                return BadRequest (new { message = "User is not on the team." });
+
+            bool success;
+            success = _TeamRepository.UpdateTeam(pullTeam);
+            if (!success)
+                return StatusCode(500);
+
+            return Ok();
         }
 
     }
