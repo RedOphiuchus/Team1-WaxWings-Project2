@@ -160,8 +160,8 @@ namespace Test
             Challenge cha1 = new Challenge(Test1, Test2, 1);
             ChRepo.AddChallenge(cha1);
             Challenge pullCha = ChRepo.GetTeamChallenges(team1.teamname).FirstOrDefault();
-            pullCha.MakeReport(pullCha.Team1, true);
-            pullCha.MakeReport(pullCha.Team2, false);
+            pullCha.MakeReport(pullCha.Team1.teamname, true);
+            pullCha.MakeReport(pullCha.Team2.teamname, false);
 
             //Act
             updateSuccess = ChRepo.UpdateChallenge(pullCha);
