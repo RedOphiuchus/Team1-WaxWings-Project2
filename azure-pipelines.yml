@@ -74,23 +74,15 @@ steps:
     searchFolder: '$(Build.ArtifactStagingDirectory)/test'
   displayName: 'Publish test results '
 
-#- task: DotNetCoreCLI@2
-#  inputs:
-#    command: 'publish'
-#    projects: '$(projectPath)/*.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    publishWebProjects: false
+    projects: '$(projectPath)/*.csproj'
 
-#- task: AzureRmWebAppDeployment@4
-#  inputs:
-#    ConnectionType: 'AzureRM'
-#    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
-#    appType: 'webApp'
-#    WebAppName: 'HeavensLadder'
-#    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-#- task: AzureWebApp@1
-#  inputs:
-#    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
-#    appType: 'webApp'
-#    appName: 'HeavensLadder'
-#    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-#    deploymentMethod: 'auto'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'PBArtifact'
+    publishLocation: 'Container'
