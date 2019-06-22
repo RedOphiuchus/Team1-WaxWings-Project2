@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
         //}
         // GET list of strings of teams that a user is in
         [HttpGet("Teams")]
-        public IActionResult UsersInTeam(string username)
+        public IActionResult TeamsByUser(string username)
         {
             List<string> TeamNameList = new List<string>();
             List<Domain.Team> TeamsList = _TeamRepository.GetUserTeams(_UserRepository.GetUserByUsername(username));
