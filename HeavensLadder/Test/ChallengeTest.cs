@@ -82,8 +82,11 @@ namespace Test
         {
             //Arrange
             Domain.Team team1 = new Domain.Team();
+            team1.teamname = "team1";
             Domain.Team team2 = new Domain.Team();
+            team2.teamname = "team2";
             Domain.Team team3 = new Domain.Team();
+            team3.teamname = "team3";
             Domain.Challenge ch1 = new Domain.Challenge(team1, team2, 0);
             Domain.Challenge ch2 = new Domain.Challenge(team1, team2, 0);
             Domain.Challenge ch3 = new Domain.Challenge(team1, team2, 0);
@@ -94,11 +97,11 @@ namespace Test
             bool team2UpdateSucceeded;
 
             //Act
-            teamNotInChallenge = ch1.MakeReport(team3, true);
-            team1UpdateSucceeded = ch2.MakeReport(team1, true);
-            ch3.MakeReport(team1, false);
-            team2UpdateSucceeded = ch4.MakeReport(team2, true);
-            ch5.MakeReport(team2, false);
+            teamNotInChallenge = ch1.MakeReport(team3.teamname, true);
+            team1UpdateSucceeded = ch2.MakeReport(team1.teamname, true);
+            ch3.MakeReport(team1.teamname, false);
+            team2UpdateSucceeded = ch4.MakeReport(team2.teamname, true);
+            ch5.MakeReport(team2.teamname, false);
 
 
             //Assert

@@ -57,7 +57,6 @@ namespace Data
             if (x != null)
             {
                 _db.User.Remove(x);
-                //_db.SaveChanges();
                 success = true;
             }
             return success;
@@ -66,6 +65,10 @@ namespace Data
         {
             bool validate = false;
             var element = _db.User.Where(a => a.Username == username).FirstOrDefault();
+            if (element == null)
+            {
+                return validate;
+            }
             if (element.Password == password)
             {
                 validate = true;

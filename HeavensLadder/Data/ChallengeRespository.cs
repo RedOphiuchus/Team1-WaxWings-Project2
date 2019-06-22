@@ -43,6 +43,15 @@ namespace Data
             return output;
         }
 
+        public Challenge GetChallengeById(int id)
+        {
+            Data.Entities.Challenge cha = _db.Challenge.Where(c => c.Id == id).Include("Sides.Team").FirstOrDefault();
+            if (cha == null)
+                return null;
+            Domain.Challenge outCha = Mapper.Map(cha);
+            return outCha;
+        }
+
         public List<Challenge> GetUnresolvedTeamChallenges(string teamname)
         {
             List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).Include("Sides.Team").ToList();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Domain;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data
 {
@@ -45,10 +46,9 @@ namespace Data
                 return false;
             foreach (Data.Entities.Rank elem in ranklist)
             {
-                if (elem != null)
+                if (elem != null & elem.Teamid == team.id && elem.Gamemodeid == game)
                 {
-                    if (elem.Teamid == team.id && elem.Gamemodeid == game)
-                        return true;
+                    return true;
                 }
             }
             return false;
@@ -58,7 +58,7 @@ namespace Data
         {
             List<Rank> ranklist = new List<Rank>();
             //changed this part to return all ranks in the db.
-            var elems = _db.Rank.Where(x => x.Id >= 0).ToList();
+            var elems = _db.Rank.Where(x => x.Id >= 0).Include("Team").ToList();
             foreach (var elem in elems)
             {
                 ranklist.Add(Mapper.Map(elem));
@@ -68,8 +68,6 @@ namespace Data
 
         public Rank GetRank(string teamname, int gamemode)
         {
-            Team team = new Team();
-            team.teamname = teamname;
             var ranklist = GetRanksByTeam(teamname);
             Rank rank = null;
             foreach (var r in ranklist)
@@ -78,10 +76,7 @@ namespace Data
                     rank = r;
             }
 
-            if (rank != null)
-                return rank;
-            else
-                return null;
+            return rank;
         }
 
         public List<Rank> GetRanksByMode(int gamemode)
@@ -96,18 +91,19 @@ namespace Data
             return ranklist;
         }
 
-        public List<Rank> GetRanksByTeam(string team)
+        public List<Rank> GetRanksByTeam(string teamname)
         {
             List<Rank> ranklist = new List<Rank>();
             var allranks = GetAllRanks();
             foreach (var elem in allranks)
             {
-                if (elem.team.teamname == team)
+                if (elem.team.teamname == teamname)
                     ranklist.Add(elem);
             }
             return ranklist;
         }
 
+        //note from akash, this function will probably need to be upda
         public bool UpdateRank(Rank rank)
         {
             if (!AlreadyExists(rank))

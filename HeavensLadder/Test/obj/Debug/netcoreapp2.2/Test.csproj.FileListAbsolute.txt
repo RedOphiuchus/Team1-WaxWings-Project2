@@ -74,3 +74,9 @@ C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\bin\D
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Data.pdb
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\Domain.pdb
 C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\obj\Debug\netcoreapp2.2\Test.csproj.CopyComplete
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.dll
+C:\Users\Akash\Desktop\Project2\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.pdb
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.dll
+C:\Revature\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.pdb
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.dll
+D:\Revature\WaxWings\Team1-WaxWings-Project2\HeavensLadder\Test\bin\Debug\netcoreapp2.2\WebAPI.pdb
