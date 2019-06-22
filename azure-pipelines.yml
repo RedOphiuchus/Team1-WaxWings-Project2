@@ -1,0 +1,88 @@
+ #ASP.NET Core
+
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  projectPath: 'HeavensLadder/WebAPI'
+  pathSolution: 'HeavensLadder/'
+  pathToTest: 'HeavensLadder/Test'
+
+steps:
+#- task: SonarCloudPrepare@1
+#  inputs:
+#    SonarCloud: 'HeavensLadderAnalysis'
+#    organization: '1905-may06-dotnet'
+#    scannerMode: 'MSBuild'
+#    projectKey: '72dcf32adceb949f8c71fc4c13cc24312518c196'
+#    projectName: 'Team1-WaxWings-Project2'
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'HeavensLadderFork'
+    organization: 'redophiuchus-github'
+    scannerMode: 'MSBuild'
+    projectKey: '8d0d4c1bf69089cb09ba51ee237438c315b12da3'
+    projectName: 'Team1-WaxWings-Project2'
+    extraProperties: |
+      sonar.cs.vstest.reportsPaths="$(Build.ArtifactStagingDirectory)/test/*.trx"
+      sonar.cs.opencover.reportsPaths="$(Build.ArtifactStagingDirectory)/coverage/*"
+
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+  workingDirectory: $(pathSolution)
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: 'ConnectionString.txt'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Agent.TempDirectory)'
+    Contents: 'ConnectionString.txt'
+    TargetFolder: 'HeavensLadder/Data'
+
+- script: dotnet test
+    --configuration $(buildConfiguration) 
+    --no-build
+    --logger trx
+    --results-directory $(Build.ArtifactStagingDirectory)/test/
+    /p:CollectCoverage=true
+    /p:CoverletOutputFormat=opencover
+    /p:CoverletOutput='$(Build.ArtifactStagingDirectory)/coverage/'
+  workingDirectory: $(pathSolution)
+  displayName: 'dotnet Test'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '*.trx'
+    searchFolder: '$(Build.ArtifactStagingDirectory)/test'
+  displayName: 'Publish test results '
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    publishWebProjects: false
+    projects: '$(projectPath)/*.csproj'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'PBArtifact'
+    publishLocation: 'Container'
