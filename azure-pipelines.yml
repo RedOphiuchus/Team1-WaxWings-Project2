@@ -12,7 +12,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  projectPath: 'HeavensLadder/API'
+  projectPath: 'HeavensLadder/WebAPI'
   pathSolution: 'HeavensLadder/'
   pathToTest: 'HeavensLadder/Test'
 
