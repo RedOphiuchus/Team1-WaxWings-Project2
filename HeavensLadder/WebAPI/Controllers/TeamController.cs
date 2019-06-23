@@ -55,7 +55,12 @@ namespace WebAPI.Controllers
                 return StatusCode(500);
             }
 
-            return Created("app/team/create", team1);
+            foreach(var user in madeTeam.Userlist)
+            {
+                user.password = null;
+            }
+
+            return Created("app/team/create", madeTeam);
         }
 
         private bool ValidateTeamInput(TeamInputModel team, out string message)
