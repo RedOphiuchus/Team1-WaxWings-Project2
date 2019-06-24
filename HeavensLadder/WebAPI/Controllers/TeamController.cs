@@ -164,6 +164,19 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
+        [HttpGet("team")]
+        public IActionResult getbyteamname(string teamname)
+        {
+            Domain.Team thisTeam = new Domain.Team();
+            thisTeam = _TeamRepository.GetByTeamName(teamname);
+
+            if (thisTeam == null)
+                return BadRequest(new { message = "Team does not exist." });
+            
+
+            return Ok(thisTeam);
+        }
+
     }
 
     

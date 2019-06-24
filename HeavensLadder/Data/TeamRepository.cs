@@ -186,7 +186,7 @@ namespace Data
             Data.Entities.Team deteam = _db.Team.Where(h => h.Teamname.Equals(name)).FirstOrDefault();
             int teamID = deteam.Id;
 
-            List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamID).ToList();
+            List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamID).Include("User").ToList();
 
             //step 4, now i gotta loop through the list of userTeams to get some datas for my team
             for (i = 0; i < deUserTeam.Count; i++)
@@ -195,14 +195,10 @@ namespace Data
                 something.Roles.Add(deUserTeam[i].Leader);
                 //user is a bit more complicated, I need to make the user object
                 //so first I will make a query to get the user entity
-                Data.Entities.User deuser = _db.User.Where(w => w.Id == deUserTeam[i].Userid).FirstOrDefault();
 
                 //now I can make a new user object and add it to my userlist.
-                User use = new User(deuser.Username, deuser.Password);
+                User use = new User(deUserTeam[i].User.Username, deUserTeam[i].User.Password);
                 something.Userlist.Add(use);
-
-
-
             }
 
 
