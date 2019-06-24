@@ -54,9 +54,9 @@ namespace Data
 
         public List<Challenge> GetUnresolvedTeamChallenges(string teamname)
         {
-            List<Data.Entities.Challenge> chas = _db.Challenge.Where(c => (c.Sides.ToList()[0].Team.Teamname == teamname) || (c.Sides.ToList()[1].Team.Teamname == teamname)).Include("Sides.Team").ToList();
-            chas = chas.Where(c => (c.Sides.ToList()[0].Winreport == null) || (c.Sides.ToList()[1].Winreport == null)).ToList();
+            List<Data.Entities.Challenge> chas = _db.Challenge.Include("Sides.Team").ToList();
             List<Challenge> output = new List<Challenge>();
+            chas = chas.Where(c => (c.Sides.ToList()[0].Winreport == null) || (c.Sides.ToList()[1].Winreport == null)).ToList();
             foreach (var cha in chas)
             {
                 output.Add(Mapper.Map(cha));
