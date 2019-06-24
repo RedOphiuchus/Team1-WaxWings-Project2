@@ -177,36 +177,16 @@ namespace Data
             return x;
         }
 
-        public Team GetByTeamName(string name)
+        public Team GetByTeamName(string teamname)
         {
             Team something = new Team(); //initialize team object!
-                                         
-            int i = 0;//index variable for loops                             
+                                                                   
             //get team id from the name
-            Data.Entities.Team deteam = _db.Team.Where(h => h.Teamname.Equals(name)).FirstOrDefault();
-            int teamID = deteam.Id;
-
-            List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamID).Include("User").ToList();
-
-            //step 4, now i gotta loop through the list of userTeams to get some datas for my team
-            for (i = 0; i < deUserTeam.Count; i++)
+            Data.Entities.Team deteam = _db.Team.Where(h => h.Teamname.Equals(teamname)).Include("UserTeam.User").FirstOrDefault();
+            if (deteam != null)
             {
-                //now I want to add the user and the role, role is easy
-                something.Roles.Add(deUserTeam[i].Leader);
-                //user is a bit more complicated, I need to make the user object
-                //so first I will make a query to get the user entity
-
-                //now I can make a new user object and add it to my userlist.
-                User use = new User(deUserTeam[i].User.Username, deUserTeam[i].User.Password);
-                something.Userlist.Add(use);
+                something = Mapper.Map(deteam);
             }
-
-
-            something.teamname = deteam.Teamname;
-
-            //add team id to the team
-            something.id = teamID;
-           
             
             return something;
         }

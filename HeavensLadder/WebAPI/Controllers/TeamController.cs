@@ -164,7 +164,7 @@ namespace WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("team")]
+        [HttpGet("{teamname}")]
         public IActionResult getbyteamname(string teamname)
         {
             Domain.Team thisTeam = new Domain.Team();
