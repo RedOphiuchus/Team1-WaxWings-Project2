@@ -182,10 +182,19 @@ namespace Data
             Team something = new Team(); //initialize team object!
                                                                    
             //get team id from the name
+            if(teamname==null)
+            {
+                return null;
+            }
+
             Data.Entities.Team deteam = _db.Team.Where(h => h.Teamname.Equals(teamname)).Include("UserTeam.User").FirstOrDefault();
             if (deteam != null)
             {
                 something = Mapper.Map(deteam);
+            }
+            else
+            {
+                return null;
             }
             
             return something;
