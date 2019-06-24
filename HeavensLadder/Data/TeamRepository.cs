@@ -160,53 +160,19 @@ namespace Data
             {
                 int userID = DBUser.Id;
 
-                //now, get all of the UserTeam entities that contain that specific userID
-                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(y => y.Userid == userID).ToList();
-                //now, loop through the UserTeam table and obtain all of the teamIDs
-                if(DBUserTeam != null)
+                //now, get all of the UserTeam entities that contain that specific userID, along with the teams
+                List<Data.Entities.UserTeam> DBUserTeam = _db.UserTeam.Where(y => y.Userid == userID).Include("Team").ToList();
+
+                //now create a list of team objects based on the above
+                for(i=0;i<DBUserTeam.Count;i++)
                 {
-                    for (i = 0; i < DBUserTeam.Count; i++)
-                        teamIDs.Add(DBUserTeam[i].Teamid);
-
+                    Team team = new Team();
+                    team.id = DBUserTeam[i].Team.Id;
+                    team.teamname = DBUserTeam[i].Team.Teamname;
+                    x.Add(team);
                 }
-            }
-
-            //now we have a list of the Team IDs, so we can go ahead and try to construct the teams using it
-            //first lets make a loop
-            for (i = 0; i<teamIDs.Count; i++)
-            {
-                //step1, create a team object
-                Team team = new Team(); //i dont know if naming them all the same thing will cause an issue
-
-                //step 2 get the team name
-                Data.Entities.Team deteam = _db.Team.Where(q => q.Id == teamIDs[i]).FirstOrDefault();
-
-                team.teamname = deteam.Teamname;
-
-                //step 3 get the other stuff, like roles, users
-                //unfortunately, its not that easy, gotta first query and get a list of UserTeams
-                List<Data.Entities.UserTeam> deUserTeam = _db.UserTeam.Where(b => b.Teamid == teamIDs[i]).ToList();
-
-                //step 4, now i gotta loop through the list of userTeams to get some datas for my team
-                for(i = 0; i>deUserTeam.Count; i++)
-                {
-                    //now I want to add the user and the role, role is easy
-                    team.Roles.Add(deUserTeam[i].Leader);
-                    //user is a bit more complicated, I need to make the user object
-                    //so first I will make a query to get the user entity
-                    Data.Entities.User deuser = _db.User.Where(w => w.Id == deUserTeam[i].Userid).FirstOrDefault();
-
-                    //now I can make a new user object and add it to my userlist.
-                    User use = new User(deuser.Username, deuser.Password);
-                    team.Userlist.Add(use);
-
-
-
-                }
-                x.Add(team);
 
             }
-
             //and finally return x, a list of teams after all that jumping around!
             return x;
         }
