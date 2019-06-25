@@ -153,6 +153,7 @@ namespace WebAPI.Controllers
                         rank1 = r;
                 }
                 rank1.AddLoss();
+                rank1.ranking = (int)rank1.CalculateRank();
 
                 ranks = _RankRepository.GetRanksByTeam(chal.Team2.teamname);
                 Rank rank2 = null;
@@ -162,6 +163,7 @@ namespace WebAPI.Controllers
                         rank2 = r;
                 }
                 rank2.AddWin();
+                rank2.ranking = (int)rank1.CalculateRank();
 
                 _RankRepository.UpdateRank(rank1);
                 _RankRepository.UpdateRank(rank2);

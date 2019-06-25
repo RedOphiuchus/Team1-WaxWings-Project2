@@ -43,6 +43,8 @@ namespace WebAPI.Controllers
                 return BadRequest(new { message = "No ranks exist yet." });
             }
 
+            ranks = ranks.OrderByDescending(r => r.ranking).ToList();
+
             return Ok(ranks);
         }
     }
